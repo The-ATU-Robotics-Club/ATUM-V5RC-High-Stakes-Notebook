@@ -1,0 +1,27 @@
+\addtocontents{toc}{\setcounter{tocdepth}{0}}
+\input{appendix/team-meeting-notes/team-meeting-notes}
+\input{appendix/club-meeting-notes/club-meeting-notes}
+
+\titleformat{\section}
+[block]
+{\normalfont\small\bf}
+{ }
+{0pt}
+{ }
+\tiny
+
+\input{appendix/project-summary/project-summary}
+
+\input{appendix/commit-logs/commit-logs}
+\addtocontents{toc}{\setcounter{tocdepth}{\defaulttocdepth}}
+
+\phantomsection % To suppress warning regarding anchoring
+\addcontentsline{toc}{chapter}{Bibliography}
+\printbibliography
+
+\titleformat{\section}
+[block]
+{\normalfont\Large\bf}
+{ }
+{0pt}
+{ }

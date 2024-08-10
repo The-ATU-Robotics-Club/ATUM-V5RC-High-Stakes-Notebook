@@ -1,0 +1,65 @@
+name: Commit Logs
+
+on: workflow_dispatch
+
+jobs:
+  commits:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Notebook Repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      
+      - name: Clone CAD Repository
+        uses: actions/checkout@v3
+        with:
+          repository: The-ATU-Robotics-Club/ATUM-VRC-Over-Under-CAD
+          ssh-key: ${{ secrets.SSH_CAD_REPO_PRIVATE_KEY }}
+          path: ./tmp/ATUM-VRC-Over-Under-CAD
+          fetch-depth: 0
+      
+      - name: Clone Code Repository
+        uses: actions/checkout@v3
+        with:
+          repository: The-ATU-Robotics-Club/ATUM-VRC-Over-Under-Code
+          ssh-key: ${{ secrets.SSH_CODE_REPO_PRIVATE_KEY }}
+          path: ./tmp/ATUM-VRC-Over-Under-Code
+          fetch-depth: 0
+
+      - name: Get Commit Logs as CSV
+        run: |
+          echo "\textbf{Commit}~BREAK~\textbf{Date}~BREAK~\textbf{Username}~BREAK~\textbf{Description}" | tee tmp/notebook.csv tmp/cad.csv tmp/code.csv
+          git log --date=format:"%-m/%-d/%Y"  --pretty=format:%h"~BREAK~"%ad"~BREAK~"%an"~BREAK~"%s --reverse >> tmp/notebook.csv
+          echo "$(grep -v "ATUBot" tmp/notebook.csv)" > tmp/notebook.csv
+          git -C tmp/ATUM-VRC-Over-Under-CAD log --date=format:"%-m/%-d/%Y" --pretty=format:%h"~BREAK~"%ad"~BREAK~"%an"~BREAK~"%s --reverse >> tmp/cad.csv
+          echo "$(grep -v "ATUBot" tmp/cad.csv)" > tmp/cad.csv
+          git -C tmp/ATUM-VRC-Over-Under-Code log --date=format:"%-m/%-d/%Y" --pretty=format:%h"~BREAK~"%ad"~BREAK~"%an"~BREAK~"%s --reverse >> tmp/code.csv
+          echo "$(grep -v "ATUBot" tmp/code.csv)" > tmp/code.csv
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Convert CSVs to LaTeX
+        run: |
+          python3 .github/commit-to-latex.py tmp/notebook.csv appendix/commit-logs/notebook-commit-log.tex ~BREAK~ 28 33 40 300
+          python3 .github/commit-to-latex.py tmp/cad.csv appendix/commit-logs/cad-commit-log.tex ~BREAK~ 28 33 40 300
+          python3 .github/commit-to-latex.py tmp/code.csv appendix/commit-logs/code-commit-log.tex ~BREAK~ 28 33 40 300
+
+      - name: Commit Changes
+        run: |
+          rm -rf tmp
+          git config --local user.email "atumsfamily8@gmail.com"
+          git config --local user.name "ATUBot"
+          git add -A
+          git commit -a -m "Update commit logs."
+        continue-on-error: true
+
+      - name: Push Commit
+        uses: ad-m/github-push-action@master
+        with:
+          branch: main
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+        continue-on-error: true

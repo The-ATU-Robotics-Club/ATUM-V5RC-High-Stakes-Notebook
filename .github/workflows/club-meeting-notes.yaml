@@ -1,0 +1,51 @@
+name: Club Meeting Notes
+
+on: workflow_dispatch
+
+jobs:
+  notes:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Notebook Repository
+        uses: actions/checkout@v3
+
+      - name: Clone Organization Repository
+        uses: actions/checkout@v3
+        with:
+          repository: The-ATU-Robotics-Club/ATU-Robotics-Organization
+          ssh-key: ${{ secrets.SSH_ORG_REPO_PRIVATE_KEY }}
+          path: ./tmp
+
+      - name: Get, Place, and Reformat Meeting Notes
+        run: |
+          rm appendix/club-meeting-notes/dates/*
+          cp tmp/meeting-notes/2024-25/*.tex appendix/club-meeting-notes/dates
+          for file in appendix/club-meeting-notes/dates/*
+          do
+            grep -v "documentclass{../notes}\|begin{document}\|end{document}" "$file" > tmpfile
+            mv tmpfile "$file"
+          done
+          rm -rf tmp
+
+      - name: Add Club Meeting Notes to Notebook
+        run: |
+          rm appendix/club-meeting-notes/dates.tex
+          for file in appendix/club-meeting-notes/dates/*
+          do
+            echo "\input{$file}" >> appendix/club-meeting-notes/dates.tex
+          done
+
+      - name: Commit Changes
+        run: |
+          git config --local user.email "atumsfamily8@gmail.com"
+          git config --local user.name "ATUBot"
+          git add -A
+          git commit -a -m "Update meeting notes."
+        continue-on-error: true
+
+      - name: Push Commit
+        uses: ad-m/github-push-action@master
+        with:
+          branch: main
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+        continue-on-error: true
