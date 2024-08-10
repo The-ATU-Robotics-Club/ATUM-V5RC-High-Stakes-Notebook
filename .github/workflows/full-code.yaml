@@ -12,7 +12,7 @@ jobs:
       - name: Clone Code Repository
         uses: actions/checkout@v3
         with:
-          repository: The-ATU-Robotics-Club/ATUM-VRC-Over-Under-Code
+          repository: The-ATU-Robotics-Club/ATUM-V5RC-High-Stakes-Code
           ssh-key: ${{ secrets.SSH_CODE_REPO_PRIVATE_KEY }}
           path: ./tmp
 

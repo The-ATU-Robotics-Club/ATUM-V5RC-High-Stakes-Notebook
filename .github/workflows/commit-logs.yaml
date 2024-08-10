@@ -14,17 +14,17 @@ jobs:
       - name: Clone CAD Repository
         uses: actions/checkout@v3
         with:
-          repository: The-ATU-Robotics-Club/ATUM-VRC-Over-Under-CAD
+          repository: The-ATU-Robotics-Club/ATUM-V5RC-High-Stakes-CAD
           ssh-key: ${{ secrets.SSH_CAD_REPO_PRIVATE_KEY }}
-          path: ./tmp/ATUM-VRC-Over-Under-CAD
+          path: ./tmp/ATUM-V5RC-High-Stakes-CAD
           fetch-depth: 0
       
       - name: Clone Code Repository
         uses: actions/checkout@v3
         with:
-          repository: The-ATU-Robotics-Club/ATUM-VRC-Over-Under-Code
+          repository: The-ATU-Robotics-Club/ATUM-V5RC-High-Stakes-Code
           ssh-key: ${{ secrets.SSH_CODE_REPO_PRIVATE_KEY }}
-          path: ./tmp/ATUM-VRC-Over-Under-Code
+          path: ./tmp/ATUM-V5RC-High-Stakes-Code
           fetch-depth: 0
 
       - name: Get Commit Logs as CSV
@@ -32,9 +32,9 @@ jobs:
           echo "\textbf{Commit}~BREAK~\textbf{Date}~BREAK~\textbf{Username}~BREAK~\textbf{Description}" | tee tmp/notebook.csv tmp/cad.csv tmp/code.csv
           git log --date=format:"%-m/%-d/%Y"  --pretty=format:%h"~BREAK~"%ad"~BREAK~"%an"~BREAK~"%s --reverse >> tmp/notebook.csv
           echo "$(grep -v "ATUBot" tmp/notebook.csv)" > tmp/notebook.csv
-          git -C tmp/ATUM-VRC-Over-Under-CAD log --date=format:"%-m/%-d/%Y" --pretty=format:%h"~BREAK~"%ad"~BREAK~"%an"~BREAK~"%s --reverse >> tmp/cad.csv
+          git -C tmp/ATUM-V5RC-High-Stakes-CAD log --date=format:"%-m/%-d/%Y" --pretty=format:%h"~BREAK~"%ad"~BREAK~"%an"~BREAK~"%s --reverse >> tmp/cad.csv
           echo "$(grep -v "ATUBot" tmp/cad.csv)" > tmp/cad.csv
-          git -C tmp/ATUM-VRC-Over-Under-Code log --date=format:"%-m/%-d/%Y" --pretty=format:%h"~BREAK~"%ad"~BREAK~"%an"~BREAK~"%s --reverse >> tmp/code.csv
+          git -C tmp/ATUM-V5RC-High-Stakes-Code log --date=format:"%-m/%-d/%Y" --pretty=format:%h"~BREAK~"%ad"~BREAK~"%an"~BREAK~"%s --reverse >> tmp/code.csv
           echo "$(grep -v "ATUBot" tmp/code.csv)" > tmp/code.csv
 
       - name: Setup Python
