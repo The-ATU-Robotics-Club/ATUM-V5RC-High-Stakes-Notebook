@@ -8,7 +8,7 @@ from datetime import date
 # Defines the appropriate file names for this file to function properly. 
 current_file_name = "appendix/project-summary/current-project.csv"
 previous_file_name = "tmp/previous-project.csv"
-output_file_name = "appendix/project-summary/project-summary.tex"
+output_file_name = "appendix/project-summary/project-changes.tex"
 project_data_file_name = "tmp/project-data.json"
 
 

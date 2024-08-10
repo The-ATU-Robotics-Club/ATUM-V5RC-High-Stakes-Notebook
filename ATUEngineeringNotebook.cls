@@ -33,12 +33,13 @@
 \RequirePackage[]{multicol} % Used for supporting multi-column item sections.\usepackage{pdfpages}
 \RequirePackage[]{colortbl} % Used for coloring table rows. 
 \RequirePackage[figurewithin=chapter]{caption} % Used for changing how figures are counted.
+\RequirePackage[]{ulem} % Used for strike-through text. 
 
 
 
 % ~~~~~~~~~~ GLOBAL DEFINITIONS ~~~~~~~~~~ %
-\gdef\season{2023-2024}
-\gdef\game{Over Under}
+\gdef\season{2024-2025}
+\gdef\game{High Stakes}
 \gdef\teamname{ATUM's Family}
 \gdef\teamnumber{ATUM}
 \gdef\matrixwidth{.9}
@@ -50,28 +51,6 @@
 
 
 % ~~~~~~~~~~ COMMANDS ~~~~~~~~~~ %
-\newcommand{\insertimage}[2]{ % Input: {image name} {scale}.
-    \begin{center}
-        \includegraphics[scale=#2, keepaspectratio]{#1}
-    \end{center}
-}
-
-\newcommand{\insertpdf}[1]{ % Input: {pdf location} 
-    \newpage
-    \begin{center}
-        \includegraphics[scale=0.275, angle=90]{#1}
-    \end{center}
-}
-
-\newcommand{\insertmatrix}[2]{ % Input: {matrix name} {matrix description}
-    \begin{table}[H]
-        \centering
-        \input{#1}
-        \caption{#2}
-        \label{fig:#1}
-    \end{table}
-}
-
 \newcommand{\mypart}[3]{ % Input: {part name} {word to use in place of "chapter"} {part file location}
     \renewcommand{\chaptername}{#2}
     \part{#1}

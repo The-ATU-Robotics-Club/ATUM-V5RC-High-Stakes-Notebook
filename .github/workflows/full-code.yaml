@@ -24,6 +24,10 @@ jobs:
           rm -rf software/code/files/api/src/*
           rm -rf software/code/files/impl/include/*
           rm -rf software/code/files/impl/src/*
+          mkdir -p software/code/files/api/include 
+          mkdir -p software/code/files/api/src 
+          mkdir -p software/code/files/impl/include 
+          mkdir -p software/code/files/impl/src 
           cp -r tmp/include/atum/* software/code/files/api/include
           cp -r tmp/src/atum/* software/code/files/api/src
           cp -r tmp/include/robots/* software/code/files/impl/include
