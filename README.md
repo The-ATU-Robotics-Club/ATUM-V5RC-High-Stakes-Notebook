@@ -9,7 +9,7 @@ general.
 
 ## Set Up
 To contribute to the notebook, you must be invited as a contributor to the 
-Overleaf. This can be done by following this [link](https://www.overleaf.com/1325617833kjhsnwskxphg#a396fc),
+Overleaf. This can be done by going here [link](https://www.overleaf.com/1325617833kjhsnwskxphg#a396fc),
 though there is a limited number of contributors, so please only invite yourself
 if you intend to work on the notebook. A view-only link (that anyone can use)
 can be found [here](https://www.overleaf.com/read/xndcqyrtgghb#903fad).
