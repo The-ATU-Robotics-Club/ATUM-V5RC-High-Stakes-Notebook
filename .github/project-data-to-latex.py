@@ -15,10 +15,10 @@ project_data_file_name = "tmp/project-data.json"
 
 # Defines the association between the task statuses and their row colors. 
 statusToColor = {
-    "Backlog": "gray",
-    "Todo": "red",
-    "In Progress": "yellow",
-    "Done": "green",
+    "Backlog": "Ivory2",
+    "Todo": "IndianRed1",
+    "In Progress": "LightGoldenrod1",
+    "Done": "DarkSeaGreen1",
     "\\textbf{\\scriptsize{Status}}": "white" # Used for the case of current-project csv being empty.
 }
 
