@@ -3,3 +3,14 @@
 Braden met with Brandon, Preston, Everett, and Bo for an initial programming workshop. They went over the basics of programming in VEX and had a general overview of the software from the previous game. Progress on software will be slower initially, due to attention being directed toward other pressing affairs in the club (shirts, sponsors, events, and so on). 
 \subsection{10/10/2024}
 Today Braden got with Brandon, Preston, Everett, and Bo to go over programming the robots. They removed the old implementations for the robots from the previous year and began the basic set up for this year. Braden will remove defunct code, refactor existing code, and produce documentation prior to next meeting to make the transition easier.
+\subsection{10/13/2024}
+Braden upgraded the project to PROS 4.1 and our version of LVGL to 8.3.4 and made changes to the project to allow compilation. 
+This involved mostly changes like
+\begin{lstlisting}[language=C++]
+    void setBrakeMode(const pros::motor_brake_mode_e brakeMode);
+\end{lstlisting}
+becoming
+\begin{lstlisting}[language=C++]
+    void setBrakeMode(const pros::motor_brake_mode_e brakeMode);
+\end{lstlisting}
+and similar adjustments. The Piston class was also removed, since an analogous class was provided with the update. 
