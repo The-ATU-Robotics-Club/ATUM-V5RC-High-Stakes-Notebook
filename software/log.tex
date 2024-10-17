@@ -14,3 +14,16 @@ becoming
     void setBrakeMode(const pros::motor_brake_mode_e brakeMode);
 \end{lstlisting}
 and similar adjustments. The Piston class was also removed, since an analogous class was provided with the update. 
+
+\subsection{10/16/2024}
+Braden over the last several days has been making several changes to prepare for a new GUI and logging system. Central to this is the autonomous routine selector. Last year, in order to add on another routine, change its name, or remove it, one would have to change several different areas of code in two different files. As such, it was rather inconvenient. The goal for this year, is to be able to place all routine information in one area.
+To this end, we think that a system employing preprocessor macros and the use of curiously recurring template pattern (CRTP) \cite{bib:crtp} would accomplish the goal of centralizing the definition of routines. Though, this would mean that we couldn't rely on polymorphism to dynamically setup the robot at the start of the program. 
+To this end, Braden has added some lines to the default makefile provided by PROS to add a preprocessor definition into the program representing the unique ID of the brain plugged in. A script was also added to force recompilation upon the ID changing. 
+\begin{lstlisting}
+# Gets the unique ID for the currently wired brain, or zero otherwise.
+# This is accessible in code as the preprocessor definition BRAIN_ID. 
+BRAIN_ID:=$(shell pros v5 status | grep -ohZ "0x[0-9]*" || echo 0)
+$(info Brain ID is $(BRAIN_ID))
+$(shell ./run-brain-id-check.sh $(BRAIN_ID)) # Forces main to rebuild if brain-id has changed. 
+CPPFLAGS=-D_POSIX_THREADS -D_UNIX98_THREAD_MUTEX_ATTRIBUTES -D_POSIX_TIMERS -D_POSIX_MONOTONIC_CLOCK -DBRAIN_ID=$(BRAIN_ID)
+\end{lstlisting}
