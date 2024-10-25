@@ -1,8 +1,10 @@
 \chapter{Log}
 \subsection{9/19/2024}
 Braden met with Brandon, Preston, Everett, and Bo for an initial programming workshop. They went over the basics of programming in VEX and had a general overview of the software from the previous game. Progress on software will be slower initially, due to attention being directed toward other pressing affairs in the club (shirts, sponsors, events, and so on). 
+
 \subsection{10/10/2024}
 Today Braden got with Brandon, Preston, Everett, and Bo to go over programming the robots. They removed the old implementations for the robots from the previous year and began the basic set up for this year. Braden will remove defunct code, refactor existing code, and produce documentation prior to next meeting to make the transition easier.
+
 \subsection{10/13/2024}
 Braden upgraded the project to PROS 4.1 and our version of LVGL to 8.3.4 and made changes to the project to allow compilation. 
 This involved mostly changes like
@@ -17,8 +19,10 @@ and similar adjustments. The Piston class was also removed, since an analogous c
 
 \subsection{10/16/2024}
 Braden over the last several days has been making several changes to prepare for a new GUI and logging system. Central to this is the autonomous routine selector. Last year, in order to add on another routine, change its name, or remove it, one would have to change several different areas of code in two different files. As such, it was rather inconvenient. The goal for this year, is to be able to place all routine information in one area.
+
 To this end, we think that a system employing preprocessor macros and the use of curiously recurring template pattern (CRTP) \cite{bib:crtp} would accomplish the goal of centralizing the definition of routines. Though, this would mean that we couldn't rely on polymorphism to dynamically setup the robot at the start of the program. 
-To this end, Braden has added some lines to the default makefile provided by PROS to add a preprocessor definition into the program representing the unique ID of the brain plugged in. A script was also added to force recompilation upon the ID changing. 
+
+Thus, Braden has added some lines to the default makefile provided by PROS to add a preprocessor definition into the program representing the unique ID of the brain plugged in. A script was also added to force recompilation upon the ID changing. 
 \begin{lstlisting}
 # Gets the unique ID for the currently wired brain, or zero otherwise.
 # This is accessible in code as the preprocessor definition BRAIN_ID. 
@@ -27,3 +31,10 @@ $(info Brain ID is $(BRAIN_ID))
 $(shell ./run-brain-id-check.sh $(BRAIN_ID)) # Forces main to rebuild if brain-id has changed. 
 CPPFLAGS=-D_POSIX_THREADS -D_UNIX98_THREAD_MUTEX_ATTRIBUTES -D_POSIX_TIMERS -D_POSIX_MONOTONIC_CLOCK -DBRAIN_ID=$(BRAIN_ID)
 \end{lstlisting}
+\subsection{10/24/2024}
+Braden discussed some C++ concepts with Preston and Bo, including pointers, references, and immutability. Next week we will go over smart pointers and polymorphism. Aside from that we made a preliminary list of tasks that can be worked on in tandem with the rewrite/refactoring process:
+\begin{itemize}
+    \item A specialized version of a motor group, a "balanced" motor group that takes in a list of left motors and a list of right motors. If this object detects that a motor has disconnected or failed on one side, it will disable a motor on the other side.
+    \item A wrapper around the current implementation for the GPS for ease of use and to properly test the sensor. 
+    \item A system using the line trackers to update the position of the robot upon seeing a line, as a free "soft" reset. 
+\end{itemize}
