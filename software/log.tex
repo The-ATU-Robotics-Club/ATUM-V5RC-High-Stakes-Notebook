@@ -38,3 +38,16 @@ Braden discussed some C++ concepts with Preston and Bo, including pointers, refe
     \item A wrapper around the current implementation for the GPS for ease of use and to properly test the sensor. 
     \item A system using the line trackers to update the position of the robot upon seeing a line, as a free "soft" reset. 
 \end{itemize}
+\subsection{10/28/2024}
+Braden began working on the visual for the GUI and finished the main menu layout. Braden also began working on the routine selector screen. Instead of working with a physical VEX brain, we are currently making use of an LVGL simulator \cite{bib:lvglsim} to make the process go by faster.  It may seem pedantic to spend this much time on the GUI, but it will be an invaluable tool later when tuning and debugging. To see the current version of the main menu, see \ref{fig:10/28/2024 gui main menu}.
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{images/october/main menu gui.png}
+    \caption{GUI main menu from simulator.}
+    \label{fig:10/28/2024 gui main menu}
+\end{figure}
+\subsection{10/30/2024}
+Braden finished the work on the routine selector page. 
+
+\subsection{10/31/2024}
+%THIS IS NOT DONE YET, BUT THE GOAL FOR TODAY: Braden finished the work on the visual components of the GUI, adding in the log, graph, and map screen (there is LVGL support for the graphs we needed so it was fairly trivial). Additionally, Braden added in a loading screen and home screen for initialization; this will be more helpful than expected, since the robot should not be touched during intialization. Braden now needs to port the code from the simulator onto a physical brain. 
