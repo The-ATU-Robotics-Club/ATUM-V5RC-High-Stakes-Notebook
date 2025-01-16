@@ -149,10 +149,70 @@ We place all code inside the atum namespace to avoid conflicts with similarly na
 When we make use of templates, we tend to use aliases for the common parametrizations for the sake of readability.
 
 \section{Tools}
-Doxygen
-VSCode + extensions
-clang-format
-cppcheck
-PROS
-Nholthaus units
-LVGL
+In order to improve the development experience, we employ a multitude of software tools to support our programming efforts. Some of these are essential to our team, while others simply provide quality of life during coding.
+
+\subsection{PROS}
+We use PROS \cite{bib:pros} as our development platform for the robots. We could provide a design matrix of some sort for why we made this decision, but it's quite straightforward. 
+
+There are pretty much three options:
+\begin{itemize}
+    \item PROS
+    \item VEXcode
+    \item Vexide
+\end{itemize}
+
+In the past there was also Robot Mesh Studio, but they are no longer continuing development. 
+
+The differences between PROS and VEXcode at this point are quite mute, with the exception of the team's extensive experience using PROS. Historically, we preferred PROS over alternatives because of the freedom in what text editor we could use as well as the quality documentation and support (this was all in comparison to VEX Coding Studio). VEXcode at this point has similar documentation and support to PROS, especially with the recent update to PROS 4. Vexide, on the other hand, represents a stark departure from PROS and VEXcode, supporting Rust development. This is intriguing, but Vexide is early in development and perhaps illegal for competition use \cite{bib:vexidelegal}. 
+
+One significant advantage PROS still has over VEXcode is that it is open source: so when we have a particularly strange issue, we can verify if it is an issue on our part or not. But, for the most part, they are quite comparable platforms. Again, the main reason we use PROS is our experience with the software.
+
+\subsection{VSCode}
+Visual Studio Code is our text editor of choice for writing programs. This is because Visual Studio Code strikes a decent balance between customization, power, and ease-of-use. 
+
+VSCode also allows for the easy installation of extensions. Outside of common extensions for C++ development, we currently employ a few other extensions specifically for robotics software development: 
+\begin{itemize}
+    \item \href{https://github.com/purduesigbots/pros-vsc}{PROS-VSC}: for obvious reasons. 
+    \item \href{https://github.com/cschlosser/doxdocgen}{Generate Doxygen Comments in VSCode}: provides a keyboard shortcut to produce a \textit{template} for methods, functions, and classes based on their parameters and return types, in accordance with Javadoc style comments. 
+    \item \href{https://github.com/streetsidesoftware/vscode-spell-checker}{Spelling Checker for Visual Studio Code}: acts a spell checker even with camel case and pascal case. 
+\end{itemize}
+
+\subsection{Doxygen}
+We use Doxygen \cite{bib:doxygen} to generate HTML from the Javadoc-style comments that we place throughout our header files. We also make use of Doxygen Awesome \cite{bib:doxygenawesome} to further stylize our documentation. This is useful (not only for notebook purposes) to provide additional resources for newer programmer on the team. 
+
+Any judges can access our documentation \href{https://the-atu-robotics-club.github.io/ATUM-V5RC-High-Stakes-Code/index.html}{here}: \hspace{30px}
+\qrcode[height = .3\linewidth]{https://the-atu-robotics-club.github.io/ATUM-V5RC-High-Stakes-Code/index.html}
+
+If the links above are inaccesible, \ref{fig:web-docs-example} has a photo of one page of the documentation. 
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.75\linewidth]{images/software/preface/documentation webpage.png}
+    \caption{The class list on our documentation page.}
+    \label{fig:web-docs-example}
+\end{figure}
+
+\subsection{Libraries}
+While we prefer to provide our own software solutions to whatever problems we face, occasionally a task would require a significant effort (several months/years) and would have little relevance to the actual behavior of the robot. In these circumstances, we make use of third-party libraries. 
+
+\subsubsection{UNITS}
+To support dimensional units (like meters, seconds, and so on), we employ the nholthaus UNITS library \cite{bib:nholthaus}. We went with this library, since it is header-only and therefore easy to set up. As a bonus, it is compile-time and efficient. 
+
+The use of dimensional units represents a significant improvement in both ease-of-development, clarity of intent, and robustness. While the former two are easy to gather, it is not immediately clear how dimensional units prevent errors. Simply put, unit conversions are consistently performed throughout the project without conscious effort. While we could be careful to avoid, say, passing in a value we intend to be in radians to a function that expects degrees, it is nice to not have to worry at all. It sounds silly, but this exact problem has occurred for folks at NASA, with expensive consequences \cite{bib:marsclimateorbiter}.
+
+\subsubsection{LVGL}
+For developing the GUI for the brain screen, we employ LVGL (Light and Versatile Graphics Library) \cite{bib:lvgl}. We make use of LVGL because of ready prepared PROS templates to integrate the library into PROS projects. 
+
+\subsection{Miscellaneous}
+\subsubsection{GitHub}
+Because we have covered GitHub earlier, we will be brief. We use git/GitHub not only for version control and project management, but also for the use of GitHub Actions and documentation hosting. 
+
+GitHub actions allow us to employ GitHub's servers to perform certain actions upon pushing code, or upon request. We make use of this to keep our documentation up-to-date (by running Doxygen and updating the GitHub webpage) as well as formatting code using clang-format.
+
+As implied, we also use GitHub for hosting our documentation. 
+
+\subsubsection{clang-format}
+Clang-format \cite{bib:clangformat} is used for automatically formatting our code based on a list of specifications. We also employ a console script to apply formatting to all files in the project (this script is ran by the formerly mentioned GitHub action upon request). 
+
+\subsubsection{cppcheck}
+Cppcheck \cite{bib:cppcheck} is used for static analysis of our code. This essentially provides additional checks over the program to detect issues that can not typically be caught by the compiler. 
