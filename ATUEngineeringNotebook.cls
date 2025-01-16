@@ -34,7 +34,7 @@
 \RequirePackage[]{colortbl} % Used for coloring table rows. 
 \RequirePackage[figurewithin=chapter]{caption} % Used for changing how figures are counted.
 \RequirePackage[]{ulem} % Used for strike-through text. 
-
+\RequirePackage[]{emoji} % Used for emojis.
 
 
 % ~~~~~~~~~~ GLOBAL DEFINITIONS ~~~~~~~~~~ %
@@ -78,7 +78,7 @@
             \textit{"#3"} -- \textbf{\large{#1}}
         \end{centered}
         \noindent{\color{Green} \rule{\linewidth}{1pt}} \vspace{-10pt} \\
-        \begin{minipage}{0.25\textwidth}
+        \begin{minipage}{0.2375\textwidth}
             \includegraphics[width=\linewidth]{#2}
         \end{minipage}
         \hfill
@@ -104,7 +104,7 @@
             #4
         \end{minipage}
         \hfill
-        \begin{minipage}{0.25\textwidth}
+        \begin{minipage}{0.2375\textwidth}
             \includegraphics[width=\linewidth]{#2}
         \end{minipage}
     \end{minipage}
