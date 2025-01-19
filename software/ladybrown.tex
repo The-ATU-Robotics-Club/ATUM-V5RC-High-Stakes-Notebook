@@ -1,0 +1,27 @@
+\chapter{Ladybrown}
+\section{Objectives}
+Because the wall stakes require decent precision and experience heavy defense, the primary goal for the software for the ladybrown was consistent and speedy movements. Additionally, we were particularly concerned with the various failure states that may arise in the course of a match (a motor going out, a sensor going out, etcetera). 
+
+The ladybrown has the following actuators we can control: 
+\begin{itemize}
+    \item Two 5.5 W motors
+    \item Two pistons
+\end{itemize}
+Additionally the ladybrown has the following sensors we can read from:
+\begin{itemize}
+    \item Two internal motor encoders
+    \item A rotation sensor
+    \item A line tracker
+\end{itemize}
+The line tracker's purpose being the detection of rings in the lady brown's "hand."
+
+In order to simplify the controls for autonomous and the operator control periods, we want the pistons to actuate and extend the ring outward automatically whenever the arms pass a certain position. Additionally, we want the arms to be balanced with one another and hold their position when stopped. 
+
+\section{Solution} 
+\subsection{Background}
+\subsection{States}
+\subsection{Movement}
+\subsection{Future Iterations}
+Going forward, we would like to experiment with the use of a Kalman filter to combine the information from the various sensors we have for rotation. This may seem like overkill, but it would be an excellent stepping stone toward more advanced filtering techniques in a more important area, such as pose tracking. In that same vein, we may also consider the use of an alternative controller to PID, such as a Linear Quadratic Regulator (LQR). 
+
+If we were to go forward with a double ladybrown, we would also have to make the necessary adjustments to the software to support the collection of both rings in the cage. Additionally, we will continue to develop our code to be more robust and clear, regardless of any behavioral/structural changes that may or may not occur. 

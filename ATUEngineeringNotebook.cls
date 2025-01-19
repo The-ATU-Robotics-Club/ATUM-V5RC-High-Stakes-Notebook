@@ -35,6 +35,7 @@
 \RequirePackage[figurewithin=chapter]{caption} % Used for changing how figures are counted.
 \RequirePackage[]{ulem} % Used for strike-through text. 
 \RequirePackage[]{emoji} % Used for emojis.
+\RequirePackage[]{subcaption} % Used for placing subfigures within figures. 
 
 
 % ~~~~~~~~~~ GLOBAL DEFINITIONS ~~~~~~~~~~ %

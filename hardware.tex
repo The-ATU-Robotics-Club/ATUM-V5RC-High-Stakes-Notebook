@@ -1,9 +1,156 @@
 \setcounter{tocdepth}{1}
 \chapter{Early Season}
 \section{Game Overview}
+
 \subsection{Game and Rule Analysis}
+\subsubsection{\textbf{Overview}}
+VEX High Stake is a 1v1 competitive game at the Vex U level. Following the rule-set release earlier this year, there are some rule changes to the general game rules for Vex U. 
+\begin{itemize}
+    \item The autonomous period was changed from 45 to 30 seconds, increasing the driver period to one minute and 15 seconds. 
+    \item Unlike last year where our starting size constraints were 18x18x18 in. and a 15x15x15 in.  This year, the starting constraints are 15x15x15 in. and 24x24x24  in. allowing for more varied designs. 
+\end{itemize}
+
+
+\subsubsection{\textbf{Specific Game rules}}
+
+
+    \textbf{Overview}
+
+    
+    This Section is made in order to analysis and explain different strategies that can be approached to specific game rules, along with possible subsystems and mechanisms that could give the team an advantage when approaching a head to head match. 
+\newline
+
+    SG1 \textbf{Starting a Match} - Prior to the start of each Match, the Robot must be placed sch that it is: 
+\begin{enumerate}
+    \item Contacting / “breaking the plane” of their Alliance’s Starting Line. .
+    \item Not contacting any Scoring Objects other than one (1) preload. 
+    \item Not contacting any other Robots.
+    \item Completely stationary (i.e., no motors or other mechanisms in motion).
+\end{enumerate}
+
+SG2 \textbf{Horizontal expansion is limited.} - Once the Match begins, Robots may only expand beyond their starting size and configuration within the following criteria:
+\begin{enumerate}
+    \item Robots may never exceed an overall footprint of 24” x 18”. For reference, 24” is roughly the width of one foam field tile.
+    \item From the Robot’s perspective, only one “X/Y” direction may expand outside of the starting configuration during the Match (i.e., the Robot can’t get both wider and longer). This single expansion direction must be identified and measured during Robot inspection, as shown in the figures below.
+    \item Vertical expansion is addressed separately by rule <SG3>. Robots may expand both horizontally and vertically; the top of the Robot is not considered an “X/Y” direction in the context of this rule.
+\end{enumerate}
+
+\textbf{SG1 and SG2 analysis and Strategy}
+
+The above rules are related to each other very closely especially relating to game strategy and robot design.  While SG1 gives us the constraints for starting the match, SG2 gives us the information to begin exploiting brainstorming different subsystems and mechanisms to give us a advantage.  Seeing \ref{fig:SG2} and referencing VURC Q\&A 2138 we begin to see how designing a goal rush mech for a subsequent 24 inch robot would work.  
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{images/Rules Figures/SG2 figure.png}
+    \caption{SG2 diagram showing legal and illegal expansion}
+    \label{fig:SG2}
+\end{figure}
+
+    By allowing a mechanism in the back of the robot approach the 24 in. max expansion we are able to position the bulk of the robot further way from the starting line. We can further push this advantage by creating another mech in the front of the robot allowing us to reach the goal even faster by shorting the travel distance needed to real a mobile goal. 
+
+although this method only works with a 24 in. bot whose overall foot print is lower then the max 24x24x24 it gives a significant advantage during auton due the distance needed to travel being much shorter. 
+\newline
+
+   \textbf{SG3} - \textbf{Vertical expansion is limited.} Once the Match begins, Robots may expand vertically, but may never contact and/or break more than two Planes of the Ladder at any given time. For the purposes of this rule, the Floor is considered a Level.
+\begin{enumerate}
+    \item For a Robot that is on the Floor (i.e., not Climbing), this is effectively a height limit of 32”, the distance between the Floor and the top of the gray rung of the Ladder.
+    \item This vertical limit is measured from the perspective of the Field; i.e., it does not “rotate with the Robot.”
+    \item Levels and Planes coincide with the horizontal and vertical dimensions of the Ladder rungs, but expand infinitely and are not limited to the volume of the Ladder. 
+\end{enumerate}
+
+\textbf{SG3 Analysis and Strategy}
+
+    SG3 covers vertical expansion and the general premise is to limit the amount of planes you are allowed to break relative to the ladder, see \ref{fig:SG3}. This forces teams to come up with more unique designs due to the robot being required to climb the ladder in stages starting from the floor. However it also gives way to incredibly unique strategies and mechanisms.
+\begin{figure}
+    \centering
+    \includegraphics[width=0.75\linewidth]{images/Rules Figures/SG3.png}
+    \caption{SG3 climbing diagram}
+    \label{fig:SG3}
+\end{figure}
+\pagebreak
+
+
+\textbf{<SG6>} \textbf{Possession is limited to two Rings and one Mobile Goal.} Robots may not have Possession of more than two (2) Rings at once. Robots may not have Possession of more than one (1) Mobile Goal at once. Robots in Violation of this rule must immediately stop all actions except for attempting to remove the excess Scoring Objects.
+
+If they are unable to remove the excess Scoring Objects, then they must return to a legal starting position (as described by <SG1>). They will not be eligible to receive points for Climbing. Any offensive or defensive interactions with Mobile Goals, Stakes, and Corners will be included in Match Affecting calculations.
+
+\begin{enumerate}
+    \item Rings on a Stake are not included in a Robot’s Possession count. For the purposes of this rule, “on a Stake” means that the Ring meets the criteria for a Scored Ring, even if it is being contacted by a Robot.
+    \item Plowing multiple Mobile Goals is permitted. However, Plowing an additional Mobile Goal while also Possessing one is considered a Violation of this rule due to the extremely high likelihood of accidental/implied Possession. Teams which employ Plowing strategies are encouraged to clearly demonstrate that none of the Mobile Goals are being Possessed, e.g., by using a flat face of the Robot with no active mechanisms.
+\end{enumerate}
+ 
+
+
+
+\textbf{SG6 analysis and Strategy}
+
+SG6 limited the possession of game elements in a effort to stop hording of game elements and unfair advantages that could occur.  For example a strategy for this season is "turtling" in which a robot has placed a fully stacked mobile goal in the positive corner and is now playing defense in order to keep the advantage they have gathered. If SG6 did not cover the possession of one Mobile Goal Turtling would include the defense of two mobile goals one being in the corner, and the other being controlled by the robot. 
+\pagebreak
+
+ \textbf{<SG11>} <\textbf{Positive corners are protected during the endgame.} During the last fifteen (15) seconds of a Match, Robots may not contact Mobile Goals that are Placed in the Positive Corners of the Field, may not contact Rings that are Scored on Mobile Goals Placed in the Positive Corners of the Field, and may not Place Mobile Goals or Score Rings in the Positive Corners of the Field. During this protected period, Robots can remove Mobile Goals that are not Placed and Rings that are not Scored from the Positive Corners of the Field, provided that the interaction does not affect the Placed/Scored status of any protected Mobile Goals or Rings. 
+\newline
+
+ \textbf{SG11 Analysis and Strategy}
+
+ This is singlehandedly one of the most important rules this season. The protection of the positive corners that last 15 seconds sets up strategies for the whole game, one such examples of these strategies is "turtling". the face that last 15 seconds are protected causes the other team to play catch up and protection if the positive corners are taken by the opponent team.  Later different strategies will be discussed and it can all be traced back to the analysis and the wording of SG11. 
+\newline
+
+
+
+
+\subsection{ \textbf{VURC Rule Modifications}}
+
+
+\textbf{<VUG1>} \textbf{Different expansion.} The intentions behind rules <SG2> and <SG3> apply, with the following clarifications:
+
+\begin{enumerate}
+    \item The 24” Robot may not expand horizontally outside this 24” x 24” limit at any time during the Match.
+    \item The 15” Robot may expand horizontally with the same “one direction” rule as <SG2>. It may never exceed an overall footprint of 24” x 15”.
+    \item The intent of rule <SG3> applies to both Robots. Neither Robot may contact or "break the Plane" of three Levels, or two non-sequential Levels, at any time.
+\end{enumerate}
+
+\subsubsection{\textbf{VUG1 Analysis and Strategy }}
+
+
+this rule modifications is a necessary modification to SG2 due to the different size requirements for VURC.  
+With the knowledge of VUG1, SG2, and Q\&A 2138 we can begin to see how certain strategies such as goal rushing can be implemented. By allowing the 24 be inspected with its starting position reaching the max 24 it is possible to circumvent Q\&A 2058 and following Q\&A 2138 we are able to establish the general idea of a goal rush strategy and mechanism. 
+\pagebreak
+
+\textbf{<VUG2>} \textbf{Different climbing. All rules and point values pertaining to Climbing apply as written, with the following modifications:}
+
+\begin{enumerate}
+    \item Clause A of <SC7> does not apply to all Robots in a VURC Match. Robots are not required to be contacting the Ladder at the end of the Match in order to receive points for Climbing. Robots not contacting the Ladder or foam tiles must be contacting another Robot from their Team that meets all criteria of <SC7>.
+    \item A Robot which meets all other Climbing requirements, but is not contacting the Ladder at the end of the Match, will have their Climbing points doubled.
+
+For example, when both Robots reach a standard Level 2, the Team would receive 12 points total (6 per Robot). If instead, both Robots have reached Level 2 and one of them is not contacting the Ladder, the Team should receive 18 points total (6 + 12).
+
+    \item In the context of rule <SG9>, a Robot which is in the process of Climbing without contacting the Ladder should be considered more “offensive” or “safe”.
+    \item A Robot that is contacting another Robot from their Team that meets the definition of Climbing will receive the Climbing protections provided by rule <SG9>.
+\end{enumerate}
+
+
+\textbf{VUG2 Analysis and Strategy}
+
+
+With VURC having different Robot Rules it is expected that we go above and beyond in creating solutions and different strategies. VUG2 exemplifies this, by allowing the so called "buddy hang" it forces teams to adapt their overall design and implementation in order to secure a more solid advantage during the competition. By doubling the points received for a singular bot it encourages teams to reach the highest tiers with a buddy hand, along with encouraging teams to reach for the high stake too.  
+    \newline
+    
+      For example a team with two bots both reach a tier 2 hand scoring for 12 overall points. Assume one of the bots is a buddy hand the score becomes 18 points, then add on a high stake ring it becomes 22 points + 3 from a top ring score coming to a overall of 25 points. Such a high amount of points could completely shift who wins or loses. 
+\newline
+
+\textbf{<VUG3>} \textbf{Different autonomous.} Rule <SC2> applies as-written, except for clause A. Climb points and Corner modifiers are included in Autonomous Bonus calculations. 
+\newline
+
+\textbf{VUG3 Analysis and Strategy }
+
+
+While VUG3 does change much it does however change the overall planning for the autonomous period.  By allowing climb points and corner modifiers it fundamentally changes the overall plan for the driver period.  Securing two fully loaded goals during auton and placing one in the positive corner would set a lead that would cause the other team to rush and panic to catch up on. 
+
+
 \subsection{Offensive Strategies During Matches}
+
 \subsection{Defensive Strategies During Matches}
+
 \subsection{Strategy for Skills Matches}
 
 \section{Design}
@@ -39,6 +186,37 @@ Kavin replaced a problematic motor on the test bed and added a GPS sensor to it.
     \includegraphics[width=0.5\linewidth]{images/october/early drive.png}
     \caption{Early season drive train as of 10/10/2024.}
     \label{fig:10/10/2024 drive train}
+\end{figure}
+\subsection{10/17/2024}
+Juan tested the 6 motor version of the drive, which worked, however, the wheel with the x-mark was pulling more wattage than expected. Further diagnosis discovered the spacing was off; reducing the washer to a smaller thickness solved the problem.  See \ref{fig:1/17/2024 Friction}.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\linewidth]{images/october/101724 friction.jpg}
+    \caption{Early season working drive train.}
+    \label{fig:1/17/2024 Friction}
+
+\end{figure}
+
+
+\subsection{10/24/24 }
+Hunter and Juan added cross braces in both the back and front of the chassis. See  \ref{fig:10-24-24 Traingle Brace}.  This added enough support that bending from unexpected forces would be limited.  A prototyped geometry for the intake was also put on in order to see what a possible intake could look like reference to \ref{fig:10-14-14 Intake Geometry}.
+
+\begin{figure} [h!]
+
+    \begin{subfigure} {0.5\textwidth}
+    \centering
+        \includegraphics[width=0.5\linewidth]{images/october/10-24-2024 Traingle Brace.jpg}
+        \caption{Triangle Brace}
+        \label{fig:10-24-24 Traingle Brace}
+    \end{subfigure}
+    \begin{subfigure} {0.5\textwidth}
+    \centering
+        \includegraphics[width=0.5\linewidth]{images/october/10-24-25 intake geometery.jpg}
+        \caption{Prototype Intake Geometry}
+        \label{fig:10-14-14 Intake Geometry}
+    \end{subfigure}
+    \caption{The geometry of the robot as of }
 \end{figure}
 
 \addtocontents{toc}{\setcounter{tocdepth}{\defaulttocdepth}}
