@@ -182,6 +182,7 @@
 \lstset{style=codestyle}
 
 \renewcommand\p@figure{Figure }
+\renewcommand\p@subfigure{Subfigure \thefigure}
 
 
 

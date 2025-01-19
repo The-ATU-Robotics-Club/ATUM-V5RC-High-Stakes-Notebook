@@ -17,11 +17,123 @@ The line tracker's purpose being the detection of rings in the lady brown's "han
 
 In order to simplify the controls for autonomous and the operator control periods, we want the pistons to actuate and extend the ring outward automatically whenever the arms pass a certain position. Additionally, we want the arms to be balanced with one another and hold their position when stopped. 
 
-\section{Solution} 
-\subsection{Background}
-\subsection{States}
+\subsection{State Machine}
+The state machine of the ladybrown helps organize its behavior into categorized states. This allows us to more easily create macros and complex behavior for the ladybrown, since we can determine in qualitative terms what it is currently doing. More detail regarding (finite) state machines and their benefits should be given in a later chapter. 
+
+The ladybrown is associated with the following states:
+\begin{itemize}
+    \item Idle: when the ladybrown is not moving.
+    \item Extending: when the ladybrown is manually being extended.
+    \item Retracting: when the ladybrown is manually being retracted.
+    \item Resting: when the ladybrown is going to its resting position.
+    \item Loading: when the ladybrown is going to its loading position.
+    \item Preparing: when the ladybrown is going to its "prepared" position to get ready to score.
+    \item Scoring: when the ladybrown is in the process of scoring a ring. 
+    \item FinishScoring: when the ladybrown is in the process of backing up after finishing scoring a ring. 
+    \item FullyExtending: when the ladybrown is made to fully extend. 
+Of all these states, Resting, Loading, Preparing, and Scoring are explicitly associated with a position via a provided hash table. The states FinishScoring and FullyExtending are implicitly associated with the positions for Preparing and Scoring, respectively. 
+\end{itemize}
+
+The behavior of the ladybrown is encapsulated in the state machine task. Simply put, the states associate with manual control set the voltage accordingly, while the states associated with positions have the ladybrown move to that location. 
+\begin{lstlisting}[language=C++]
+START_TASK("Ladybrown State Machine")
+while(true) {
+    switch(state) {
+        case LadybrownState::Idle: voltage = 0; break;
+        case LadybrownState::Extending: voltage = params.manualVoltage; break;
+        case LadybrownState::Retracting: voltage = -params.manualVoltage; break;
+        default: moveTo(state); break;
+}
+wait();
+}
+END_TASK
+\end{lstlisting}
+The state transitions are best depicted with the use of a diagram.  See \ref{fig:ladybrown state transitions}, for instance.  Note that "Any" is a placeholder state for any other state in the diagram and !F.Sc. refers to any state \textit{not} FullyScoring.
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{images/software/ladybrown/ladybrown fsm.png}
+    \caption{State transitions for the ladybrown.}
+    \label{fig:ladybrown state transitions}
+\end{figure}
+
+\subsection{Control}
+The control task is responsible for ensuring the following:
+\begin{itemize}
+    \item An appropriate voltage is applied to the ladybrown. 
+    \item Actuating the pistons at the appropriate position. 
+    \item Balancing the two sides of the ladybrown. 
+    \item Holding the position of the ladybrown when stopped. 
+\end{itemize}
+Applying an appropriate voltage means performing any additional processing to the motor inputs before using them. This would mean using a slew rate during manual control or preventing downward movement when already below a certain position, for instance.
+\begin{lstlisting}[language=C++]
+double output{0.0};
+params.manualSlew.slew(voltage);
+if(enableSlew) {
+    output += params.manualSlew.getOutput();
+} else {
+    output = voltage;
+}
+\end{lstlisting}
+
+Actuating the pistons is accomplished simply by checking if the position of the arms is past a given point. There is also the possibility to add a delay after retracting the piston while moving down, so that there is less of a chance of the ring cage hitting the intake. 
+\begin{lstlisting}[language=C++]
+void Ladybrown::handlePiston() {
+  if(getPosition() >= params.flippingPosition) {
+    piston->extend();
+  } else {
+    if(piston->isExtended()) {
+      piston->retract();
+      left->brake();
+      right->brake();
+      wait(params.pistonDelay);
+    }
+  }
+}
+\end{lstlisting}
+
+The code for holding the position of the arm only returns a value for output if the arm is above a certain given position (to prevent unnecessary motor actuation). The position to hold is set depending on what state the ladybrown was last placed in (with the exception of Idle). All those states associated with a position, will have the ladybrown hold that position. The manual states (Extending and Retracting) will hold based on wherever the ladybrown has stopped. 
+
+If a hold position has been provided, a simple PID controller is used to close the difference between the current position and the desired reference. Regardless of if a hold position has been provided, a voltage will be added based on the cosine of the ladybrown's angle relative to the ground. This is essentially a feed forward term to counteract gravity. 
+\begin{lstlisting}[language=C++]
+double Ladybrown::getHoldOutput() {
+    if(getPosition() < params.noMovePosition) {
+        return 0.0;
+    }
+    double holdOutput{0.0};
+    if(holdPosition.has_value() && state == LadybrownState::Idle) {
+        const double holdError{getValueAs<degree_t>(holdPosition.value() - getPosition())};
+        const double hold{params.holdController.getOutput(holdError)};
+        holdOutput += hold;
+    }
+    holdOutput += params.kG * cos(getValueAs<radian_t>(getPosition()));
+    return holdOutput;
+}
+\end{lstlisting}
+
+Balancing the arms is straightforward, with a PID controller used with the left side's position as the state and the right side's position as the reference (assuming both are operational). 
+\begin{lstlisting}[language=C++]
+double balance{0.0};
+if(getValueAs<degree_t>(getPosition()) >= params.noMovePosition() && left->check() && right->check()) {
+    balance = params.balanceController.getOutput(
+    getValueAs<degree_t>(left->getPosition()),
+    getValueAs<degree_t>(right->getPosition()));
+}
+\end{lstlisting}
+
 \subsection{Movement}
-\subsection{Future Iterations}
+The actual movement from position to position is fairly simple: once the target position is gathered, a provided profile follower starts a new profile from the current position to said target. Then the output from this follower is used to set the voltage for the ladybrown in a loop until the follower is finished or the state has changed. 
+
+This is similar to how turning is accomplished with the drive. In fact, motion profiling with the ladybrown was somewhat of a proof-of-concept for turning with the drive.  
+
+\subsection{Iterations}
+\subsubsection{Past}
+The control and software for the arm can be seen as an extension of our progress regarding our intake arms from Over Under. There, we employed similar movement algorithms for control purposes, but lacked the same robustness and transparency that this current iteration has. 
+
+In this year, our current version of the ladybrown software evolved from the initial prototyping code: where the triggers merely moved the arms up and down. When this resulted in jerky movements, a slew rate was added. When more advanced control and macros were desired, the current version emerged. When using hold mode on the motors resulted in overheating and "squealing," we transitioned to our own system for holding the arms in place. The core of that initial prototype is found in the manual mode for the ladybrown control (i.e., the Extending and Retracting states). 
+
+For more detail on the evolution of the ladybrown software (and the rest of the code in general), the software logs should provide a more complete history than the summary here. 
+
+\subsubsection{Future}
 Going forward, we would like to experiment with the use of a Kalman filter to combine the information from the various sensors we have for rotation. This may seem like overkill, but it would be an excellent stepping stone toward more advanced filtering techniques in a more important area, such as pose tracking. In that same vein, we may also consider the use of an alternative controller to PID, such as a Linear Quadratic Regulator (LQR). 
 
 If we were to go forward with a double ladybrown, we would also have to make the necessary adjustments to the software to support the collection of both rings in the cage. Additionally, we will continue to develop our code to be more robust and clear, regardless of any behavioral/structural changes that may or may not occur. 
