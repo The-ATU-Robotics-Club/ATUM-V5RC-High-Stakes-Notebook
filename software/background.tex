@@ -1,10 +1,158 @@
 \chapter{Background}
 There are several software components that are used throughout the rest of the project. Rather than explaining these concepts wherever they first appear in the notebook, they are collected into this chapter. This should provide the relevant context to better understand the rest of the code for the robots.
+
 \section{Robot Disambiguation}
+Because VURC involves the creation of two robots, we are programming for two robots (of course). We preferably want to reuse as much code as feasible between the two robots. Not only will this make the task at hand more manageable, but more robust: it is easier to catch problems and debug if we essentially have two machines to test with. To this end, our project is designed to be compiled and uploaded to both robots. 
+
+We could have accomplished this with templates, but decided against this as we preferred that updates for the 15" API are concurrently performed with the 24" API; i.e., they are one in the same. If we made use of templates, we would have to work on the 15" as a base, save the template we produce, and update the version for the 24". Preferably, the two bots share all the same files. 
+
+We've previously made use of jumper cables to dynamically setup the robots upon initialization during Over Under. During the disabled period, the robot would check if a jumper cable was placed in a specified ADI port and would setup accordingly. 
+
+To avoid the need for a jumper cable and clear up that ADI port, we swapped out the jumper cable for a file on the Brain SD card. The same logic applies: the robot would check if the file associated with the 15" was present and setup the program for the 15" if it was found, otherwise it would setup for the 24". 
+
+This still required another piece of hardware (the SD card), though, so we preferably wanted a solution that relied on the least additional number of components, zero. 
+
+To this end, we make use of the unique Brain ID present on all VEX V5 Brains. This value is normally inaccessible in programs, so we have to find this ID and inject it into the program somehow. To this end, we make use of the PROS client to find the Brain ID with the 
+\begin{lstlisting}[language=bash]
+pros v5 status
+\end{lstlisting}
+command. After this, we make use of preprocessor definition statements to allow the program to adjust setup upon compilation. 
+
+This means that, depending on which robot is currently connected, the compiled program delivered to the brain is changed to accommodate its unique setup. 
+\begin{lstlisting}[language=bash]
+# Gets the unique ID for the currently wired brain, or zero otherwise.
+# This is accessible in code as the preprocessor definition BRAIN_ID. 
+BRAIN_ID:=$(shell pros v5 status | grep -ohZ "0x[0-9a-e]*" || echo 0)
+$(info Brain ID is $(BRAIN_ID))
+$(shell rm bin/main.cpp.o) # Forces main to rebuild to update brain ID. 
+CPPFLAGS=-D_POSIX_THREADS -D_UNIX98_THREAD_MUTEX_ATTRIBUTES -D_POSIX_TIMERS -D_POSIX_MONOTONIC_CLOCK -DBRAIN_ID=$(BRAIN_ID)
+\end{lstlisting}
+
 \section{GUI}
+In years past, the GUI for our team has been lacking. This doesn't just have aesthetic consequences, while, yes, it is nice for the screen to have pleasant visuals, there is a whole means of debugging, tuning, and error-handling that we just aren't using. 
+
+Before Over Under, we would simply make use of the LCD template that PROS ships with. This works for simple autonomous routine selectors and debugging purposes, but is rather limited. 
+
+Last year, we began to experiment with LVGL \cite{bib:lvgl} for our selector. Just a handful of buttons, but a marked transition from years prior. 
+
+This year, we wanted a GUI with the following features: 
+\begin{itemize}
+    \item A routine selector.
+    \item A logging utility.
+    \item A graphing utility.
+    \item A map visual. 
+\end{itemize}
+These are common features across GUIs implemented in VEX, each with obvious benefits. Further, we want a home screen to display our logo and an error screen. Additionally, the routine selector should only need routines to be modified in one place; in Over Under, adding a routine involved changing around four different disparate sections of the project. 
+
+The development of the screens themselves was fairly straightforward: we made use of a LVGL simulator \cite{bib:lvglsim} to create each screen separately. For the sake of simplicity and a consistent color palette, we borrowed the color scheme from the image editing program GIMP \cite{bib:gimp} for our own GUI. 
+
+After each screen was developed, the code was broken up into classes, with a Screen class holding those variables and helper methods shared and used by all screens. Alongside this structure, the interface between the GUI and the rest of the program was developed (the ability to add lines to the log, points to the graph, etcetera). 
+
+The most technically challenging section of the GUI was the matter of consolidating routines into a single location. To this end, in our interface for the robots, a virtual private method for initializing the routines is added. This method will involve populating two other private members, one for the behavior associated with the autonomous routines and one for their names. Using preprocessor macro statements, we can make this entire process seamless. 
+\begin{lstlisting}[language=C++]
+/**
+ * @brief Creates space within which to place the routine definitions the robot
+ * will run and the GUI will display.
+ *
+ */
+#define ROUTINE_DEFINITIONS_FOR(robot) void robot::initializeRoutines()
+
+/**
+ * @brief Begins an autonomous routine definition. The name parameter will be
+ * what is displayed by the routine selector on the GUI.
+ *
+ */
+
+#define START_ROUTINE(name)                                                    \
+  if(!routineNames.empty()) routineNames += '\n';                              \
+  routineNames += name;                                                        \
+        routines.push_back( \
+            [this]() {
+/**
+ * @brief Ends an autonomous routine definition.
+ *
+ */
+#define END_ROUTINE                                                            \
+  });
+\end{lstlisting}
+
+In order to force this method to run, we explicitly delete several default-generated constructors and make use of a pattern called Curiously Recurring Template Pattern (CRTP) \cite{bib:crtp}. 
+\begin{lstlisting}[language=C++]
+// These are deleted to force the use of the templated constructor.
+Robot() = delete;
+Robot(const Robot &) = delete;
+Robot(Robot &&) = delete;
+
+/**
+ * @brief Constructs the Robot by calling its children's initializeRoutine
+ * method. This essentially stores the routine information for future use (and
+ * tells the GUI to begin loading).
+ *
+ * @tparam SpecRobot
+ * @param spec
+ */
+template <class SpecRobot>
+Robot(SpecRobot *spec) {
+    spec->initializeRoutines();
+    GUI::Manager::startLoading(spec->getRoutineNames());
+}
+\end{lstlisting}
+This allows the straightforward adjustment of our routines all in one location, the autonomous file for the robot in question: 
+\begin{lstlisting}[language=C++]
+ROUTINE_DEFINITIONS_FOR(RobotClone) {
+  START_ROUTINE("Skills")
+  END_ROUTINE
+
+  START_ROUTINE("Test A")
+  END_ROUTINE
+}
+\end{lstlisting}
+
+For completeness sake, all primary screens present in the GUI are seen in \ref{fig:all gui screens}.
+\begin{figure}
+    \centering
+    \begin{subfigure}{0.45\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{images/software/background/gui/home.jpg}
+        \caption{Home screen.}
+    \end{subfigure}
+    \begin{subfigure}{0.45\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{images/software/background/gui/main.jpg}
+        \caption{Main menu.}
+    \end{subfigure}
+    \vfill
+    \begin{subfigure}{0.45\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{images/software/background/gui/graph.jpg}
+        \caption{Graph screen.}
+    \end{subfigure}
+    \begin{subfigure}{0.45\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{images/software/background/gui/log.jpg}
+        \caption{Log screen.}
+    \end{subfigure}
+    \vfill
+    \begin{subfigure}{0.45\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{images/software/background/gui/map.jpg}
+        \caption{Map screen.}
+    \end{subfigure}
+    \begin{subfigure}{0.45\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{images/software/background/gui/routines.jpg}
+        \caption{Routines screen.}
+    \end{subfigure}
+    \caption{The various screens of the ATUM GUI.}
+    \label{fig:all gui screens}
+\end{figure}
+
 \section{Wrappers and Error Handling}
+
 \section{Tasks}
+
 \section{Control Concepts}
+
 \subsection{State Machines}
 \subsection{Motion Profiling}
 \subsection{PID}
