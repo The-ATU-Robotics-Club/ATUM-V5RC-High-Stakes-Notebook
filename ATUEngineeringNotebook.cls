@@ -36,6 +36,9 @@
 \RequirePackage[]{ulem} % Used for strike-through text. 
 \RequirePackage[]{emoji} % Used for emojis.
 \RequirePackage[]{subcaption} % Used for placing subfigures within figures. 
+\RequirePackage[]{booktabs} % Used to make tables typical to typesetting.
+\RequirePackage[]{enumitem} % Used for changing the layout of lists. 
+
 
 
 % ~~~~~~~~~~ GLOBAL DEFINITIONS ~~~~~~~~~~ %
@@ -117,10 +120,15 @@
 \let\oldheadrule\headrule % Necessary to change header line color. 
 \let\oldfootnoterule\footnoterule % Necessary to change footer line color. 
 
+\arrayrulecolor{Green} % Change table rule color. 
+
+\setlist[itemize]{noitemsep}
+\setlist[enumerate]{noitemsep}
+
 \fancypagestyle{plain}{
 \fancyhf[]{}
 \fancyhf[EHL]{\textbf{\color{Green}{\teamnumber}}}
-\fancyhf[OHR]{\textbf{\color{Green}{VRC {\season}: {\game}}}}
+\fancyhf[OHR]{\textbf{\color{Green}{VURC {\season}: {\game}}}}
 \fancyhf[EFL]{\textbf{\color{Green}{\thepage}}}
 \fancyhf[OFR]{\textbf{\color{Green}{\thepage}}}
 \renewcommand{\headrulewidth}{2pt}
@@ -149,10 +157,10 @@
 {0pt}
 { }
 
-\titlespacing\chapter{0pt}{0pt}{0pt}
-\titlespacing\section{0pt}{0pt}{0pt}
-\titlespacing\subsection{0pt}{0pt}{0pt}
-\titlespacing\subsubsection{0pt}{0pt}{0pt}
+\titlespacing\chapter{0pt}{0pt}{5pt}
+\titlespacing\section{0pt}{0pt}{5pt}
+\titlespacing\subsection{0pt}{0pt}{5pt}
+\titlespacing\subsubsection{0pt}{0pt}{5pt}
 
 \renewcommand{\thesection}{}
 \renewcommand{\thesubsection}{}
@@ -183,7 +191,7 @@
 
 \renewcommand\p@figure{Figure }
 \renewcommand\p@subfigure{Subfigure \thefigure}
-
+\renewcommand\p@table{Table \thetable}
 
 
 % ~~~~~~~~~~ PENALTIES ~~~~~~~~~~ %
