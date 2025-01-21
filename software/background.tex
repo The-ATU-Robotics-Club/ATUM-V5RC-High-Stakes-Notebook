@@ -154,6 +154,93 @@ For completeness sake, all primary screens present in the GUI are seen in \ref{f
 \section{Control Concepts}
 
 \subsection{State Machines}
-\subsection{Motion Profiling}
 \subsection{PID}
+\subsection{Motion Profiling}
+For movements, we could simply use PID to drive the current position of a system to a desired reference position. This works in many circumstances, but could be improved upon. Rather than blindly applying a voltage based on error, we can instead take into account the physical parameters of the system: that is, max velocity, acceleration, and jerk. 
+
+This is the idea behind motion profiling: instead of telling the system to go to the end position, we essentially plan out the entire motion for it to get there. This will lead to smoother movements as well as potentially reduce the amount of oscillations the system experiences. As a bonus, the parametrization aspect of this process can provide us with useful information, like how long we should expect the system to take to get to our target. 
+
+This can be accomplished in a few ways. The most apparent approach would be to populate a vector with the points along the profile according to the constraints. Then going back through the vector in a forward and backward pass to make sure that max acceleration and jerk are obeyed at each step. Potentially adding another pass for timestamping. 
+
+This should work, but can be quite slow. A preferred approach is found in a paper from HIDRAULICA \cite{bib:hidraulica} and implemented by V5RC team 4253B \cite{bib:4253bmotion}. This approach generates only a specific number of points and uses kinematics to perfectly interpolate between them. Only those points at different stages of the motion (when we reach max velocity, when we reach max acceleration, and so on) are created and stored, then, whenever we request a point between two of these values, we use the starting point and kinematics to find the requested point. This method allows the on-the-fly generation of linear motion profiles. 
+\begin{lstlisting}[language=C++]
+Point getTimedPoint() {
+    timer.start();
+    const second_t t{timer.timeElapsed()};
+    return getPointAt(t);
+}
+\end{lstlisting}
+
+We have used a similar method before during Over Under. While this technique is appropriate when there are few disturbances, if the system is not quite linear or experiences external disturbances (as were common during Over Under), the system will be unable to follow the profile and will fall short of its destination. To this end, we also make use of position sampling: instead of basing our current target for the system on time along the profile, we also check \textit{where} along the profile we currently are. This is done via a binary search that finds a close time along the profile that matches our current position. This means that, if the system was blocked or perturbed, it will be able to "catch up" to where it should be. 
+\begin{lstlisting}[language=C++]
+Point getClosestPoint(const Unit s) {
+    // Return appropriate value if behind start or in front of end.
+    if(distance(s, start) > Unit{0}) {
+        return {start,      
+                UnitsPerSecond{0},
+                UnitsPerSecondSq{0},
+                UnitsPerSecondCb{(isBackwards()) ? -params.maxJ : params.maxJ},
+                0_s};
+    } else if(distance(s, end) < Unit{0}) {
+        return {end,
+                UnitsPerSecond{0},
+                UnitsPerSecondSq{0},
+                UnitsPerSecondCb{0},
+                points[6].t};
+    }
+    const auto [t0, t2] = getTimeBounds(s);
+    const second_t t1{searchForClosestPointTime(s, t0, t2)};
+    return getPointAt(t1);
+}
+\end{lstlisting}
+
+Because this would mean the system never begins moving (as at the starting position of the profile, the system should be at standstill), we also find the point it should be at in time and take the max parameters of the two as our current target. 
+\begin{lstlisting}
+Point getPoint(const Unit s = Unit{0}) {
+    Point point{getTimedPoint()};
+    if(params.usePosition) {
+        const Point closestPoint{getClosestPoint(s)};
+        if(abs(closestPoint.v) > abs(point.v)) {
+            timer.setTime(closestPoint.t);
+            point = closestPoint;
+        }
+    }
+    graphPoint(point);
+    return point;
+}
+\end{lstlisting}
+
+This results in robust motion profiles that we employ on both our ladybrown movements as well as turning for the drive. See \ref{fig:all motion profiles} to see some demo outputs for the motion profiler. 
+\begin{figure}
+    \centering
+    \begin{subfigure}{0.45\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{images/software/background/motion/4_STAGES.jpg}
+        \caption{Four stage motion profile.}
+    \end{subfigure}
+    \begin{subfigure}{0.45\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{images/software/background/motion/5_STAGES.jpg}
+        \caption{Five stage motion profile.}
+    \end{subfigure}
+    \vfill
+    \begin{subfigure}{0.45\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{images/software/background/motion/6_STAGES.jpg}
+        \caption{Six stage motion profile.}
+    \end{subfigure}
+    \begin{subfigure}{0.45\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{images/software/background/motion/7_STAGES.jpg}
+        \caption{Seven stage motion profile.}
+    \end{subfigure}
+    \vfill
+    \begin{subfigure}{0.45\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{images/software/background/motion/trapezoidal.jpg}
+        \caption{Trapezoidal motion profile.}
+    \end{subfigure}
+    \caption{Various examples of motion profiles.}
+    \label{fig:all motion profiles}
+\end{figure}
 \subsection{Slew Rates}

@@ -17,7 +17,7 @@ The line tracker's purpose being the detection of rings in the lady brown's "han
 
 In order to simplify the controls for autonomous and the operator control periods, we want the pistons to actuate and extend the ring outward automatically whenever the arms pass a certain position. Additionally, we want the arms to be balanced with one another and hold their position when stopped. 
 
-\subsection{State Machine}
+\section{State Machine}
 The state machine of the ladybrown helps organize its behavior into categorized states. This allows us to more easily create macros and complex behavior for the ladybrown, since we can determine in qualitative terms what it is currently doing. More detail regarding (finite) state machines and their benefits should be given in a later chapter. 
 
 The ladybrown is associated with the following states:
@@ -56,7 +56,7 @@ The state transitions are best depicted with the use of a diagram.  See \ref{fig
     \label{fig:ladybrown state transitions}
 \end{figure}
 
-\subsection{Control}
+\section{Control}
 The control task is responsible for ensuring the following:
 \begin{itemize}
     \item An appropriate voltage is applied to the ladybrown. 
@@ -120,12 +120,12 @@ if(getValueAs<degree_t>(getPosition()) >= params.noMovePosition() && left->check
 }
 \end{lstlisting}
 
-\subsection{Movement}
+\section{Movement}
 The actual movement from position to position is fairly simple: once the target position is gathered, a provided profile follower starts a new profile from the current position to said target. Then the output from this follower is used to set the voltage for the ladybrown in a loop until the follower is finished or the state has changed. 
 
 This is similar to how turning is accomplished with the drive. In fact, motion profiling with the ladybrown was somewhat of a proof-of-concept for turning with the drive.  
 
-\subsection{Iterations}
+\section{Iterations}
 \subsubsection{Past}
 The control and software for the arm can be seen as an extension of our progress regarding our intake arms from Over Under. There, we employed similar movement algorithms for control purposes, but lacked the same robustness and transparency that this current iteration has. 
 

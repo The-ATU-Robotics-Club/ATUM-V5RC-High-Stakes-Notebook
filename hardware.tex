@@ -2,6 +2,130 @@
 \chapter{Early Season}
 
 \section{Design}
+This section will discuss the proposed design solutions for the 2024-2025 Vex High Stakes
+design challenge, highlighting the strengths and weaknesses of well-known mechanisms
+and prototypes. We will propose designs that can be used for both robots. Design selection will not happen in this section, only
+propositions and brainstorming.
+\newline
+
+
+\subsubsection{Design Philosophy}
+As a VURC team, we have the ability to manufacture parts that are created using legal raw
+stock as defined by <VUR4> in the game manual. See \ref{fig:VUR4} for <VUR4>. As the first designs of the season, we will choose not to design our own gears or sprockets
+initially. Having all the vex gears to choose from will allow us to save time and immediately
+jump into building any subsystems that require gears or sprockets. Moreover, we will use
+vex parts for the majority of the first robot designs as it will allow us to tinker with many
+prototypes of ideas without having to dedicate potential days of resources into something
+that could easily be replicated with vex parts that are readily available.
+However, this does not mean that we will not fabricate parts of our own.
+
+Our approach for these first bots will utilize as many Vex parts as we can get away with initially. As the
+robot comes together we will look into making subsystems more efficient via 3-D printing or
+by utilizing more effective materials where vex parts may be lacking in strength or geometry.
+The reasoning behind the ’Vex-parts-first philosophy’ is simply due to our experience
+with designing a custom chassis and subsystems during the pervious Vex competitive seasons.
+For example, in previous years the majority of the chassis components and subsystems were designed with large amounts of 3-D printed components. 
+
+However, after finally getting the chassis built, if the CAD geometry conflicted with game elements or the components under-performed during the testing phase; we would hit a barrier that day progression-wise. No amount of tuning could be done to custom pieces if they needed to be raised by 1/4” for example. In the case that the team builds an identical mechanism using only Vex parts, tuning could be done immediately due to the modular nature of Vex parts.
+\newline
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{images/misc/VUR4 RAW STOCK.PNG}
+    \caption{VUR4 Raw Stock.}
+    \label{fig:VUR4}
+\end{figure}
+
+\subsection{Drivetrain Brainstorming}
+
+\begin{table}
+    \centering
+    \begin{tabular}{lcccc}
+        \toprule
+        & Speed  & Torque & Simplicity & Strafing \\
+        \midrule
+        Tank    & 1 & 1   & 4 & 0 \\
+        X        & 1.4 & 0.7 & 1 & 1 \\
+        H        & 1   & 1   & 2 & 1 \\
+        Mecanum  & 1   & 1   & 3 & 1 \\
+        \bottomrule
+    \end{tabular}
+    \caption{Early design matrix for different drive trains.}
+    \label{tab:drive design matrix}
+\end{table}
+
+Having identified the game challenge, the most important and most overlooked part of a
+robot is the drivetrain. Considering the challenge of keeping the robots relatively compact
+and needing to effectively traverse the field, there are many drive-trains that
+would be highly compatible with this season’s design challenge. The drive-trains considered are found in \ref{tab:drive design matrix} and CAD depictions are found in \ref{fig:drivetrains}.
+
+Note that the speed for the X drive is 1.4. This is because the as the drive can be viewed
+as two tank drives joined together at 90\degree. At which point, when both run independently,
+the velocity vectors of each would add together, resulting in a forward velocity of  $\sqrt{2}$ times faster than tank with the same gearing and wheel diameter \cite{bib:drivetrainlore}. The speed of the other
+drive trains is mostly dependent on gearing and wheel diameter, and are assumed equivalent.
+Last is a tie between X and H which would have to contend with awkward wheel
+orientation and a perpendicular wheel respectively. 
+
+
+Torque scores are derived similarly to speed: assumed equivalent except for X with
+analogous reasoning.The scores for simplicity are ranks. Tank is clearly the most straightforward design,with no special concerns. Next is Mecanum, where the main concern is each wheel being independently-powered (and the additional width). Then H which requires an additional wheel in the center of the robot. Then X which requires each wheel be independently powered and offset by 45\degree. Finally, bogie would require two additional center wheels, each wheel be independently-powered, and an additional linkage. Strafing is simply considered as a boolean value. 
+
+
+% \ref{fig:h drive}
+\begin{figure} [h!]
+    \centering
+    \begin{subfigure}{0.45\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{images/drivetrains/h drive.jpg}
+        \caption{H-drive.}
+        \label{fig:h drive}
+    \end{subfigure}
+    \begin{subfigure}{0.45\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{images/drivetrains/tank_ex.PNG}
+        \caption{Tank drive.}
+        \label{fig:tank drive}
+    \end{subfigure}
+    \vfill
+    \begin{subfigure}{0.45\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{images/drivetrains/X-drive.png}
+        \caption{X-drive.}
+        \label{fig:x drive}
+    \end{subfigure}
+    \begin{subfigure}{0.45\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{images/drivetrains/mechanum_ex.PNG}
+        \caption{Mecanum drive.}
+        \label{fig:mechanum drive}
+    \end{subfigure}
+    \caption{Different potential drivetrains.}
+    \label{fig:drivetrains}
+\end{figure}
+
+\subsection{Ring Manipulation Brainstorming}
+Another major subsystem involves ring manipulation. We need to develop a mechanism that, when presented a ring, can effectively control it in a manner that will allow us to score. The way the team sees it, there are at least three methods of manipulating rings: a claw, intake rollers, and intake hooks. Since the term 'manipulator' can be a bit vague describing a mechanism and its purpose, we are going to divide this subsection into two parts that we believe a 'ring manipulator' encompasses. Out of the three solutions proposed to manipulate rings two categories can be created: an Intake Mechanism and Scoring Mechanism. An intake will not necessarily score rings, but it will allow us to get a ring laying on the ground into our bot so we can later score it. Likewise, a scoring mechanism will likely not be able to intake, but it will allow us to control rings contained within our robot to score them.
+\subsubsection{Intake Mechanisms}
+This section will contain our proposed solutions for an intake mechanism along with a design matrix for all proposed mechanisms.
+\subsubsection{Scoring Mechanisms}
+This section will contain our proposed solutions for a scoring mechanism along with a design matrix for all proposed mechanisms.
+
+
+
+\subsection{Odometry}
+\begin{figure}
+    \centering
+        \includegraphics[width=\pagewidth, angle=90]{images/Subassemblies Drawings and Parts/Odom_Pod_Drawing.pdf}
+    \caption{Enter Caption}
+    \label{fig:enter-label}
+\end{figure}
+
+
+\subsubsection{Overview}
+To accurately track our robots' movement across the field during the autonomous and driver control periods, we had to come up with an improved method of odometry. 
+
+
+
 \section{Design Selection}
 \subsection{Vision}
 \section{Miscellaneous}
@@ -154,7 +278,7 @@ Hunter and Juan added cross braces in both the back and front of the chassis. Se
     \begin{subfigure} {0.5\textwidth}
     \centering
         \includegraphics[width=0.5\linewidth]{images/November/11-16-24 prototype ramp.jpg}
-        \caption{ramp angle in order to begin prototyping}
+        \caption{Ramp angle in order to begin prototyping}
         \label{fig:11-16-24 ramp angle}
     \end{subfigure}
     \caption{The initial intake ramp for the robot.}
@@ -168,16 +292,16 @@ Hunter and Juan added cross braces in both the back and front of the chassis. Se
  \begin{subfigure} {0.5\textwidth}
         \centering
         \includegraphics[width=0.5\linewidth]{images/November/11-17-24 tensioner A.jpg} 
-        \caption{un-tension intake}
+        \caption{Un-tension intake.}
         \label{fig:11-17-24 Tension A}
     \end{subfigure}
     \begin{subfigure} {0.5\textwidth}
     \centering
         \includegraphics[width=0.5\linewidth]{images/November/11-17-24 tensioner B.jpg}
-        \caption{ramp angle in order to begin prototyping}
+        \caption{Ramp angle in order to begin prototyping}
         \label{fig:11-17-24 Tension B}
     \end{subfigure}
-    \caption{fully tensioned intake.}
+    \caption{Fully tensioned intake.}
  \end{figure}
 
 
@@ -210,13 +334,13 @@ Hunter and Juan added cross braces in both the back and front of the chassis. Se
  \begin{subfigure} {0.5\textwidth}
         \centering
         \includegraphics[width=.5\linewidth]{images/November/11-20-24 conveyor.jpg} 
-        \caption{Prototype structure for a conveyor system}
+        \caption{Prototype structure for a conveyor system.}
         \label{fig:11-20-24 conveyor}
     \end{subfigure}
     \begin{subfigure} {0.5\textwidth}
     \centering
         \includegraphics[width=0.5\linewidth]{images/November/11-20-24 conveyor with sprockets.jpg}
-        \caption{Conveyor system with added sprockets}
+        \caption{Conveyor system with added sprockets.}
         \label{fig:11-20-24 Conveyor with sprockets}
     \end{subfigure}
     \caption{fully tensioned intake.}
@@ -234,8 +358,7 @@ Hunter and Juan added cross braces in both the back and front of the chassis. Se
 
 
 \subsection{11/22/24}
-    Realizing that the mobile goal needs to be tilted in order to score the rings. we decided that allowing the mobile goal clamp to tilt we are able to score on the stake, while having a mechanism to secure the mobile goal. The first iteration of the clamp can be found in \ref{}
-
+    Realizing that the mobile goal needs to be tilted in order to score the rings. we decided that allowing the mobile goal clamp to tilt we are able to score on the stake, while having a mechanism to secure the mobile goal. The first iteration of the clamp can be found in
     
 \begin{figure}
     \centering
