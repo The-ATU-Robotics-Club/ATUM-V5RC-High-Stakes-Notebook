@@ -1,0 +1,6 @@
+1. Go here: https://lvgl.io/tools/imageconverter
+2. Select v8
+3. Upload the image
+4. Give an appropriate name
+5. Select "True color with alpha"
+6. Select "C array"
