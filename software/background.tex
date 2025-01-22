@@ -150,11 +150,93 @@ For completeness sake, all primary screens present in the GUI are seen in \ref{f
 \section{Wrappers and Error Handling}
 
 \section{Tasks}
+Tasks are more or less threads in the context of PROS. Essentially, actions that occur in the background to normal processes. Tasks are important for constructs like odometry, where we would prefer that the tracking occur \textit{in the background} of the other work we are performing. Or even for printing to the remote, where updates require specific pauses in between commands. 
+
+While it is possible to avoid tasks, they can simplify the program significantly if used appropriately. There are three primary concerns with tasks:
+\begin{itemize}
+    \item Overuse, leading to increased complexity.
+    \item Lack of a pause in a task loop, leading to CPU-hogging. 
+    \item Managing global, mutable state among several tasks, leading to unexpected behavior. 
+\end{itemize}
+Overuse is mitigated by plain restraint. Similarly, adding pauses to loops like:
+\begin{lstlisting}[language=C++]
+while(true) {
+    ...
+    wait(); // This is to allow other tasks to run!
+}
+\end{lstlisting}
+is maintained by discipline (it helps that issues that stem from this are typically obvious and easily corrected). The last issue can typically be avoided, isn't too serious, or, failing that, can be managed using a mutex.  
+
+The way tasks are typically created in PROS is using a particularly procedural technique, where a task is created as such:
+\begin{lstlisting}[language=C++]
+void taskFn(void*) {
+    while(true) {
+        std::cout << "Hello world!\n";
+        pros::delay(10);
+    }
+}
+
+void opcontrol() {
+    Task task{taskFn, "Example Task"};
+}
+\end{lstlisting}
+Preferably, when we create an object like an arm or odometry system, a task is created upon construction. To this end, we use a method created by fellow competitors, the earliest reference to which we are aware of is from team 7842F during Turning Point (their website seems to have been removed, unfortunately, but it listed a similar concept we discuss here) \cite{bib:theotasks}.
+
+We created an interface class called Task that uses CRTP in a similar manner to our GUI to make use of a method called prepBackgroundTasks defined by its derivatives. This method will populate a vector of parameters to create PROS tasks. When it comes time to start the background tasks, startBackgroundTasks is called on odometry, or the arm, or whatever the system in question is and another vector of unique pointers to PROS tasks is populated based on the given parameters. 
+\begin{lstlisting}[language=C++]
+void Task::startBackgroundTasks() {
+    // If the tasks have already started, don't try to start them again.
+    if(tasks.size()) {
+        return;
+    }
+    for(TaskParams params : taskParams) {
+        auto task = std::make_unique<pros::Task>(params.taskFn,
+                                                 params.priority,
+                                                 TASK_STACK_DEPTH_DEFAULT,
+                                                 params.name.c_str());
+        tasks.push_back(std::move(task));
+        taskLogger.debug("Task \"" + params.name + "\" with priority " +
+                         std::to_string(params.priority) + " has started.");
+    }
+}
+\end{lstlisting}
+
+The trick is that the task functions provided to the PROS task constructor are function objects stored in the parameters we collected for each task.  See this snippet from the protected part of the Task interface:
+\begin{lstlisting}[language=C++]
+struct TaskParams {
+    const std::string name;
+    const std::uint32_t priority;
+    const std::function<void()> taskFn;
+};
+
+std::vector<TaskParams> taskParams;
+\end{lstlisting}
+We also ensure that the prepBackgroundTasks method is called by strategically deleting the default constructors of Task and calling the method in its single constructor.
+\begin{lstlisting}[language=C++]
+Task() = delete;
+Task(const Task &) = delete;
+Task(Task &&) = delete;
+
+template <class TaskHandler>
+Task(TaskHandler *handler,
+     const Logger::Level loggerLevel = Logger::Level::Info) :
+     handlerName{handler->getHandlerName()},
+     taskLogger{loggerLevel} {
+    handler->prepBackgroundTasks();
+    taskLogger.debug("Tasks associated with " + handlerName +
+                     " have been prepared to start.");
+}
+\end{lstlisting}
+
+This class allows us to associate Tasks intimately with the objects they work with. Additionally, it allows us to associate an arbitrary number of tasks (up to the limit of concurrent tasks) with said objects. Further, its usage is made simpler via preprocessor macros, similar to the macros for the Robot interface. 
 
 \section{Control Concepts}
-
 \subsection{State Machines}
+
+
 \subsection{PID}
+
+
 \subsection{Motion Profiling}
 For movements, we could simply use PID to drive the current position of a system to a desired reference position. This works in many circumstances, but could be improved upon. Rather than blindly applying a voltage based on error, we can instead take into account the physical parameters of the system: that is, max velocity, acceleration, and jerk. 
 
@@ -243,4 +325,5 @@ This results in robust motion profiles that we employ on both our ladybrown move
     \caption{Various examples of motion profiles.}
     \label{fig:all motion profiles}
 \end{figure}
+
 \subsection{Slew Rates}
