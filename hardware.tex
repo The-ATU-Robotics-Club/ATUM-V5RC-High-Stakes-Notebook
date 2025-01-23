@@ -113,7 +113,7 @@ This section will contain our proposed solutions for a scoring mechanism along w
 
 
 \subsection{Odometry}
-\begin{figure}
+\begin{figure} [h!]
     \centering
         \includegraphics[width=\pagewidth, angle=90]{images/Subassemblies Drawings and Parts/Odom_Pod_Drawing.pdf}
     \caption{Enter Caption}
@@ -122,8 +122,72 @@ This section will contain our proposed solutions for a scoring mechanism along w
 
 
 \subsubsection{Overview}
-To accurately track our robots' movement across the field during the autonomous and driver control periods, we had to come up with an improved method of odometry. 
+To accurately track our robots' movement across the field during the autonomous and driver control periods, we had to come up with an improved method of odometry. In previous seasons, our team has used the same wheel encoders with success but had trouble with the overall placement and design of the wheel module. 
 
+
+
+\subsection{Goal Rush Mechanism}
+
+\subsubsection{Overview}
+
+When brainstorming ideas in order to reach Mobile Goals, a Goal Rush mechanism we opted to design an over-center
+locking clamp. This design consisted of four different components, a base, a finger, the
+over-center pivot, and the connectors. The base is mounted on a c-channel which is then attached to the
+drive train. The finger, which serves as the clamp, is connected to the columns on the base and
+is designed to grab the mobile goal securely. The over-center pivot point is also mounted to the
+columns on the base above the clamp with the connectors from one corner of the pivot
+connecting to the clamp and then to the over-center pivot. The top of the pivot will connect to the
+pneumatic piston connecting to the top of the pivot with a custom U-bracket.
+\newline
+
+Insert images of the original clamp design here
+
+The reason we decided to use an over-center locking clamp was to address a common issue
+with a regular pneumatic clamp, which many teams- including ours- use. The problem is that the
+mobile goal can be stolen if an opposing team’s clamp is stronger. An over-center locking clamp
+resolves this issue by providing security with both pneumatic and mechanical locking
+mechanisms. The pneumatic piston holds the mobile goal securely, while the over-center design
+mechanically locks it in place, preventing theft.
+\newline
+
+By using this design we are able to leverage the geometry and mechanical advantage to enhance
+clamping force. A typical clamp has a pivot point called the center position which moves up and down
+in a straight line. However, in an over-center lock, the pivot point moves slightly past the center
+position, locking it into place. This action creates a force that is resisted by the mechanism’s
+geometry, making it extremely difficult to unlock without intentional action. As a result, it will be
+virtually impossible for another robot to steal the mobile goal from us, significantly increasing our
+chances of winning the goal rush during the 30-second autonomous period.
+\newline
+
+In the first iteration of our design, the Goal Rush mech worked exactly as we envisioned it. At
+this point, we had yet to decide on a way to attach it to the robot. After reviewing the design we
+realized that it was beyond our specifications given for the task, such as if we did attach it to the robot it would not be within the size limits. However, with a prototype design rapid prototyping could now be done further pushing our overall design process.
+\newline
+
+In our second iteration of the locking clamp, we slimmed down the components to 0.1 inches
+each and decided to print multiple pieces of each component. We would mesh the parts
+together so the mechanism would have a total thickness of 0.5 inches. This design ended up
+being too unstable and lacked rigidity, even with 100% infill of ABS filament. We quickly realized
+that the excessive space between each component was the cause of its fragility. So we decided
+to utilize that unused space by filling it with plastic, making the mechanism much stronger while
+still staying within 0.5 inches. This ended up as our final product.
+\newline
+
+Insert design schematics of the final product here
+
+
+after finalizing a clamping system we then begin to look toward a method to attach the product to the robot. We then prototyped and 3-D printed a prototype made of ABS plastic and realized that it was far too weak to hold
+the clamp. It lacked the necessary tensile strength and was to elastic making it less than ideal to support the goal rush
+mech. After much deliberation, we decided it would be better and more stable to CNC a piece of
+¼ inch piece of polycarbonate plastic, which would be stronger than ABS plastic and still keep the
+design as concise as possible.
+\newline
+
+after the initial prototype it was found that the original piece did not meet sizing specifications along with raised the mobile goal mech higher then we wished. We then redesigned the arm to have a downward curve past the pivot point of the pneumatic allowing for a smoother grab on the mobile goal
+allowing it to perfectly slip underneath the mobile goal. After we CNC the design we made the design once again
+out of polycarbonate plastic we attached it to the clamp through the slot on the mechanism base. Then we attached the pneumatic piston which controls the clamp, and another for vertical movement. 
+
+Insert images of the final design here
 
 
 \section{Design Selection}
