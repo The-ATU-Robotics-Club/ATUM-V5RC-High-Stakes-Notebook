@@ -148,6 +148,13 @@ For completeness sake, all primary screens present in the GUI are seen in \ref{f
 \end{figure}
 
 \section{Wrappers and Error Handling}
+Wrappers around PROS devices are omnipresent throughout our code. These serve several purposes, depending upon the device being wrapped. In the case of the Odometer class, for instance, a three wire encoder is encapsulated with the logic to get proper readings from the AMT102-V encoders we use and to find distance traveled. 
+
+Some wrappers are more plain, for instance the optical sensor is wrapped to support returning an enumerated value for the color read, indexing, and proximity detection. As with all smart devices, there is also support for dynamic initialization: where the port of the device is determined at runtime, rather than given explicitly. 
+
+Overall, the wrappers provide simpler application for the use cases we have. Another critical purpose these wrappers serve is error handling. Many device wrappers are equipped with a "check" method (or equivalent) that provides basic diagnostics. 
+
+In the case of motors, for example, we can detect if motors are overheating or if they are not connected. In the case of line trackers, we can check if the reading is above a "baseline" expected value to see if it is functional. We can even test limit switches by pressing them during initialization to ensure they are functioning. 
 
 \section{Tasks}
 Tasks are more or less threads in the context of PROS. Essentially, actions that occur in the background to normal processes. Tasks are important for constructs like odometry, where we would prefer that the tracking occur \textit{in the background} of the other work we are performing. Or even for printing to the remote, where updates require specific pauses in between commands. 
@@ -232,9 +239,13 @@ This class allows us to associate Tasks intimately with the objects they work wi
 
 \section{Control Concepts}
 \subsection{State Machines}
+Finite state machines are a class of automata that are defined by states and transitions between them (the strict definition is more rigorous, but irrelevant for our purposes). State machines are conceptually valuable in robotics for modeling the states of the subsystems of our robot.
 
+In the case of the ladybrown, we can model the behavior of the ladybrown in terms of states: loading, scoring, resting, and so on. We can also use a simple switch statement to associate various behaviors with each state. 
 
-\subsection{PID}
+In short, state machines provide an excellent method of organizing the state and behavior of our subsystems. 
+
+%\subsection{PID}
 
 
 \subsection{Motion Profiling}
@@ -327,3 +338,8 @@ This results in robust motion profiles that we employ on both our ladybrown move
 \end{figure}
 
 \subsection{Slew Rates}
+Slew rates are essentially rate limiters. That is to say, if you were slewing a voltage of 12 to the arms with a rate of 1 V each call. The first call would provide a voltage of 1 V, the second 2 V, the third 3 V, and so on. 
+
+Slew rates were initially popularized in VEX as a way of preventing PTC trips during the Cortex days, since the slower acceleration led to smaller reverse current \cite{bib:sigbotsslew}. To this day, a small amount of slew is applied to motor movements (at least for VEXcode) \cite{bib:vexinbuiltslew}. 
+
+We are more interested in the use of slew rates for general purpose rate limiting. To this end, the applications are potentially vast from finer-tuned controls on the arm or drive, to motion planning applications.

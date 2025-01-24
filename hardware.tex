@@ -68,7 +68,7 @@ orientation and a perpendicular wheel respectively.
 
 
 Torque scores are derived similarly to speed: assumed equivalent except for X with
-analogous reasoning.The scores for simplicity are ranks. Tank is clearly the most straightforward design,with no special concerns. Next is Mecanum, where the main concern is each wheel being independently-powered (and the additional width). Then H which requires an additional wheel in the center of the robot. Then X which requires each wheel be independently powered and offset by 45\degree. Finally, bogie would require two additional center wheels, each wheel be independently-powered, and an additional linkage. Strafing is simply considered as a boolean value. 
+analogous reasoning. The scores for simplicity are ranks. Tank is clearly the most straightforward design, with no special concerns. Next is mecanum, where the main concern is each wheel being independently-powered (and the additional width). Then H which requires an additional wheel in the center of the robot. Then X which requires each wheel be independently powered and offset by 45\degree. Finally, bogie would require two additional center wheels, each wheel be independently-powered, and an additional linkage. Strafing is simply considered as a boolean value. 
 
 
 % \ref{fig:h drive}
@@ -104,27 +104,119 @@ analogous reasoning.The scores for simplicity are ranks. Tank is clearly the mos
 \end{figure}
 
 \subsection{Ring Manipulation Brainstorming}
-Another major subsystem involves ring manipulation. We need to develop a mechanism that, when presented a ring, can effectively control it in a manner that will allow us to score. The way the team sees it, there are at least three methods of manipulating rings: a claw, intake rollers, and intake hooks. Since the term 'manipulator' can be a bit vague describing a mechanism and its purpose, we are going to divide this subsection into two parts that we believe a 'ring manipulator' encompasses. Out of the three solutions proposed to manipulate rings two categories can be created: an Intake Mechanism and Scoring Mechanism. An intake will not necessarily score rings, but it will allow us to get a ring laying on the ground into our bot so we can later score it. Likewise, a scoring mechanism will likely not be able to intake, but it will allow us to control rings contained within our robot to score them.
+Another major subsystem involves ring manipulation. We need to develop a mechanism that, when presented a ring, can effectively control it in a manner that will allow us to score. The way the team sees it, there are at least three methods of manipulating rings: a claw, intake rollers, and intake hooks. Since the term 'manipulator' can be a bit vague describing a mechanism and its purpose, we are going to divide this subsection into two parts that we believe a 'ring manipulator' encompasses. Out of the three solutions proposed to manipulate rings two categories can be created: an Intake Mechanism and Scoring Mechanism. An intake will not necessarily score rings, but it will allow us to get a ring laying on the ground into our bot so we can later score it. Likewise, a scoring mechanism will likely not be able to intake, but it will allow us to control rings contained within our robot to score them. 
 \subsubsection{Intake Mechanisms}
-This section will contain our proposed solutions for an intake mechanism along with a design matrix for all proposed mechanisms.
+This section will contain our proposed solutions for an intake mechanism along with a design matrix for all proposed mechanisms, weighing the pros and cons of all mechanisms discussed. Our brainstorming in this section will be referenced when we choose our robot design in the future. 
+
+
+So how exactly do we move a ring from on the field and into the robot? In prevous years, many teams along with ourselves have used a set of complaint material, such as flex wheels, rubber bands, or plastic rollers. This has been the standard for Vex over the years; utilizing friction to move a game element into the robot. But how does it apply to this game? The team has thought of many mechanisms, but this is what we deduced:
+\subsubsection{\begin{center}
+    Methods of Intaking:
+\end{center}}
+\begin{enumerate}
+    \item A series of compliant rubber band rollers that grabbed a ring from the top, moving it into the robot.
+    \begin{itemize}
+        \item Pros
+        \subitem
+        - Lots of tuning capacity ie. sprocket sizing
+    \end{itemize}
+    \begin{itemize}
+        \item Cons
+        \subitem
+        - Rubber bands are complicated compared to alternatives
+        \subitem
+        - Bands can break under defense
+    \end{itemize}
+\end{enumerate}
+We as a team have lots of experience with this method of intaking. As last year during the 2023-2024 season in Over Under, both our 15" and 24" bots used this method of intaking game elements. Rubber band solutions are quite tedious to work with as it requires many rubber bands to assemble. Our 15" Over Under robot utilized 
 \subsubsection{Scoring Mechanisms}
 This section will contain our proposed solutions for a scoring mechanism along with a design matrix for all proposed mechanisms.
 
 
 
 \subsection{Odometry}
-\begin{figure} [h!]
-    \centering
-        \includegraphics[width=\pagewidth, angle=90]{images/Subassemblies Drawings and Parts/Odom_Pod_Drawing.pdf}
-    \caption{Enter Caption}
-    \label{fig:enter-label}
-\end{figure}
+
 
 
 \subsubsection{Overview}
-To accurately track our robots' movement across the field during the autonomous and driver control periods, we had to come up with an improved method of odometry. In previous seasons, our team has used the same wheel encoders with success but had trouble with the overall placement and design of the wheel module. 
+To accurately track our robots' movement across the field during the autonomous and driver control periods, we had to come up with an improved method of odometry. In previous seasons, our team has used the same wheel encoders with success but had trouble with the overall placement and design of the wheel module. Problems with our last season's odometer pods were that they were too bulky in size, lacked stroke length, and were too difficult to integrate into an existing chassis. We knew that we wanted to create a completely modular design that's easy to install on any configuration. To eliminate these issues, our team had to switch to a more custom and universal mechanism that could allow our tracking to work nearly perfectly. When brainstorming ideas (see \ref{fig:odom brainstorm}) 
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\linewidth]{images//Odometry/Odom Brainstorm.jpg}
+    \caption{Design Brainstorming Sketch}
+    \label{fig:odom brainstorm}
+\end{figure}
+for this new iteration we came up with the most important issues that the new design would address:
+\begin{itemize}
+    \item Reduce the footprint that pods take up on the underside of the chassis
+    \item Increase design durability without sacrificing size constraints
+    \item Allow for more diverse mounting locations
+    \item Decrease unnecessary slop with wheel and encoder rotations
+    \item Increase the stroke length so that the odometers will always make contact with the ground even while the chassis is elevated
+\end{itemize}
 
+ These improvements would allow the robots to accurately track their position relative to the field and game elements even when an unexpected event occurs such as being lifted up by another bot or game element. From our experience, it is best to design every subassembly to perform under any conditions so the drivers don't have to worry about mechanical failure. With past odometer assemblies being fragile, we knew durability would be a characteristic to focus on. Considering these goals, the team began prototyping a mechanism solely out of readily available Vex hardware. We have long wanted to introduce a spring-loaded odometry pod with only 1 axis of extension and retraction. A design like this would allow the assembly to stay as compact as possible and not extend out of its range of space. With this in mind, came the first iteration (see \ref{Odom I}).
+ 
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{images//Odometry/Odom First.jpg}
+    \caption{Design Iteration I}
+    \label{Odom I}
+\end{figure}
 
+Although this was a simple prototype, it allowed us to envision what could be simplified with a 3D-printed model that combined much of the redundant geometry. When fully extended, this design fit in a 3" X 3" X 4" rectangular area, which would allow us to have much more space in the chassis for wire and pneumatic routing. The 1.5" standoffs act as stanchions, allowing the hub assembly to slide precisely while being held in constant compression by the springs. When attached to a chassis and tested, we found that there was far too much slop between the standoffs and pillow block bearing.
+This created a pivot point that would allow the assembly to move slightly in the opposite direction of the drive, thus skewing true encoder values. We then began trying to implement more precisely machined hardware such as a 1/4" aluminum rod in place of standoffs and a tighter bearing fitment that would be designed and printed (see \ref{Odom Brainstorm II}).
+\begin{figure}
+    \centering
+    \includegraphics[width=0.65\linewidth]{images//Odometry/Odom Brainstorm 2.jpg}
+    \caption{Iteration II Brainstorming Sketch}
+    \label{Odom Brainstorm II}
+\end{figure}
+After locating the commercially available stock and designing the bearing pieces, it was time to try out the second iteration. The final rendition of this design differed from the sketch slightly, in that we offset the mounting brackets from the wheel shaft to try and disperse weight more evenly (see \ref{fig:odom1} and \ref{fig:odom2}).
+
+\begin{figure} [h!]
+    \centering
+    \begin{subfigure}{0.45\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{images//Odometry/Odom Second I.jpg}
+        \caption{Iso}
+        \label{fig:odom1}
+    \end{subfigure}
+    \begin{subfigure}{0.50\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{images//Odometry/Odom Second II.jpg}
+        \caption{Front}
+        \label{fig:odom2}
+    \end{subfigure}
+    \caption{Second Iteration}
+    \label{fig:Odom2}
+\end{figure}
+
+\begin{figure} [h!]
+    \centering
+    \begin{subfigure}{0.45\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{images//Odometry/Final Odom II.jpg}
+        \caption{Iso}
+        \label{fig:finalodom1}
+    \end{subfigure}
+    \begin{subfigure}{0.50\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{images/Odometry/Final Odom I.jpg}
+        \caption{Front}
+        \label{fig:odom2}
+    \end{subfigure}
+    \caption{Final Design}
+    \label{fig:Final Odom 2}
+\end{figure}
+
+Once the second iteration was assembled and installed onto the chassis, we were happy to see that the previous issue was eliminated only to notice something worse had revealed itself. The amount of friction between the PLA and aluminum did not allow the assembly to slide freely when the bot was lifted from the ground. Keeping this design would essentially make our efforts useless, so we decided to go in a different direction. After some doing research and testing on different materials around the lab, we decided that a linear block and railing system would be the best fit to move our odometer assembly without letting it bind up. We purchased the readily available materials (see \ref{Railing}) and began to CAD these pieces out so that we could build a new and improved design around them. With this iteration, the assembly would be so well supported that it did not require equal mounting on both sides of the wheel. This allowed us to conserve space, while also increasing the size of our print that held the assembly, increasing durability. Finally, we designed and printed a mounting bracket that would hold everything together and integrate with a Vex 3-by c-channel (see \ref{fig:finalodom1} and \ref{fig:Final Odom 2}). Following the testing of this design, we were pleased with how it performed. The design was able to integrate well into any location along the underside of the chassis. It conserves a large amount of space, allowing us to strengthen the weak points in the design. It has a total of 55mm of stroke, which is more than enough for any situation the robot should be elevated in. Overall, we decided to keep this as a final design and see how it would perform in our first competition of the season.
+\begin{figure}
+    \centering
+    \includegraphics[width=0.35\linewidth]{images//Odometry/Railing Odom.jpg}
+    \caption{Linear Railing}
+    \label{Railing}
+\end{figure}
 
 \subsection{Goal Rush Mechanism}
 
@@ -435,10 +527,6 @@ Hunter and Juan added cross braces in both the back and front of the chassis. Se
     Today was highly focused on the rear of the chassis and then mogo mech. With the given c-channel raising the mobile goal to a point the conveyor subsystem could not score on the stake. a solution was thought of that removing the stand-off braces and replacing them with a 3d print would allow us to then cut down a section of the c channel in order to reach a appropriate height with the mogo mech. A mechanism is also needed in order to achieve a correct angle when clamping down on mobile goals. 
 
 \subsection{11/24/24}
-
-
-    
-    
 
 \addtocontents{toc}{\setcounter{tocdepth}{\defaulttocdepth}}
 \setcounter{tocdepth}{\defaulttocdepth}
