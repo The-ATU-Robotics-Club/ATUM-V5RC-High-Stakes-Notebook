@@ -3,9 +3,7 @@
 
 \section{Design}
 This section will discuss the proposed design solutions for the 2024-2025 Vex High Stakes
-design challenge, highlighting the strengths and weaknesses of well-known mechanisms
-and prototypes. We will propose designs that can be used for both robots. Design selection will not happen in this section, only
-propositions and brainstorming.
+design challenge, highlighting the strengths and weaknesses of well-known mechanisms and prototypes. We will then propose designs that can be used for both robots.
 \newline
 
 
@@ -19,26 +17,30 @@ prototypes of ideas without having to dedicate potential days of resources into 
 that could easily be replicated with vex parts that are readily available.
 However, this does not mean that we will not fabricate parts of our own.
 
-Our approach for these first bots will utilize as many Vex parts as we can get away with initially. As the
-robot comes together we will look into making subsystems more efficient via 3-D printing or
-by utilizing more effective materials where vex parts may be lacking in strength or geometry.
+Our approach for these first bots will utilize vex parts as a rapid prototyping interface initially. As the
+robot begins to take shape, several subsystems will be looked at to see if they can become more efficient via 3-D printing or
+by utilizing more effective materials where vex parts may be lacking in strength or in overall design.
 The reasoning behind the ’Vex-parts-first philosophy’ is simply due to our experience
-with designing a custom chassis and subsystems during the pervious Vex competitive seasons.
-For example, in previous years the majority of the chassis components and subsystems were designed with large amounts of 3-D printed components. 
+with designing a custom chassis and subsystems during the pervious  competitive seasons.
+For example, in previous years the majority of the chassis components and subsystems were designed with large amounts of 3-D printed components.
 
-However, after finally getting the chassis built, if the CAD geometry conflicted with game elements or the components under-performed during the testing phase; we would hit a barrier that day progression-wise. No amount of tuning could be done to custom pieces if they needed to be raised by 1/4” for example. In the case that the team builds an identical mechanism using only Vex parts, tuning could be done immediately due to the modular nature of Vex parts.
-\newline
-
-\begin{figure}
+\begin{figure} [h!]
     \centering
     \includegraphics[width=0.5\linewidth]{images/misc/VUR4 RAW STOCK.PNG}
     \caption{VUR4 Raw Stock.}
     \label{fig:VUR4}
 \end{figure}
 
+However, after finally getting the chassis built, if the CAD geometry conflicted with game elements or the components under-performed during the testing phase; we would hit a barrier that day progression-wise. No amount of tuning could be done to custom pieces if they needed to be raised by 1/4” for example. In the case that the team builds an identical mechanism using only Vex parts, tuning could be done immediately due to the modular 
+nature of Vex parts.
+
+\subsection{Building Two 15" Robots}
+This year, we will make an interesting design choice before even starting the design. In that, we will design one 15" robot, utilize all of our research and development time to make into a quality machine, then clone it. The clone will be the 24" version. Our reasoning is simply due to more streamlined design process and being able to focus resources better. In previous years, we have always had issues with two different robots. We believe this is the best way to go this year, especially given the rule analysis. 
+
+
 \subsection{Drivetrain Brainstorming}
 
-\begin{table}
+\begin{table}[h!]
     \centering
     \begin{tabular}{lcccc}
         \toprule
@@ -69,9 +71,11 @@ orientation and a perpendicular wheel respectively.
 
 Torque scores are derived similarly to speed: assumed equivalent except for X with
 analogous reasoning. The scores for simplicity are ranks. Tank is clearly the most straightforward design, with no special concerns. Next is mecanum, where the main concern is each wheel being independently-powered (and the additional width). Then H which requires an additional wheel in the center of the robot. Then X which requires each wheel be independently powered and offset by 45\degree. Finally, bogie would require two additional center wheels, each wheel be independently-powered, and an additional linkage. Strafing is simply considered as a boolean value. 
+\pagebreak
+\section{Drivetrain design selection}
 
 
-% \ref{fig:h drive}
+
 \begin{figure} [h!]
     \centering
     \begin{subfigure}{0.45\linewidth}
@@ -104,7 +108,13 @@ analogous reasoning. The scores for simplicity are ranks. Tank is clearly the mo
 \end{figure}
 
 \subsection{Ring Manipulation Brainstorming}
-Another major subsystem involves ring manipulation. We need to develop a mechanism that, when presented a ring, can effectively control it in a manner that will allow us to score. The way the team sees it, there are at least three methods of manipulating rings: a claw, intake rollers, and intake hooks. Since the term 'manipulator' can be a bit vague describing a mechanism and its purpose, we are going to divide this subsection into two parts that we believe a 'ring manipulator' encompasses. Out of the three solutions proposed to manipulate rings two categories can be created: an Intake Mechanism and Scoring Mechanism. An intake will not necessarily score rings, but it will allow us to get a ring laying on the ground into our bot so we can later score it. Likewise, a scoring mechanism will likely not be able to intake, but it will allow us to control rings contained within our robot to score them. 
+Another major subsystem involves ring manipulation. We need to develop a mechanism that, when presented a ring, can effectively control it in a manner that will allow us to score. The way the team sees it, there are at least three methods of manipulating rings: a claw, intake rollers, and intake hooks. 
+
+
+Since the term 'manipulator' can be a bit vague describing a mechanism and its purpose, we are going to divide this subsection into two parts that we believe a 'ring manipulator' encompasses. Out of the three solutions proposed to manipulate rings two categories can be created: an Intake Mechanism and Scoring Mechanism. 
+
+
+An intake will not necessarily score rings, but it will allow us to get a ring laying on the ground into our bot so we can later score it. Likewise, a scoring mechanism will likely not be able to intake, but it will allow us to control rings contained within our robot to score them. 
 \subsubsection{Intake Mechanisms}
 This section will contain our proposed solutions for an intake mechanism along with a design matrix for all proposed mechanisms, weighing the pros and cons of all mechanisms discussed. Our brainstorming in this section will be referenced when we choose our robot design in the future. 
 
@@ -114,11 +124,11 @@ So how exactly do we move a ring from on the field and into the robot? In prevou
     Methods of Intaking:
 \end{center}}
 \begin{enumerate}
-    \item A series of compliant rubber band rollers that grab a ring from the top, moving it into the robot.
+    \item \textit{A series of compliant rubber band rollers that grab a ring from the top, moving it into the robot.}
     \begin{itemize}
         \item Pros
         \subitem
-        - Lots of tuning capacity ie. sprocket sizing
+        - Lots of tuning capacity i.e., sprocket sizing
     \end{itemize}
     \begin{itemize}
         \item Cons
@@ -128,15 +138,18 @@ So how exactly do we move a ring from on the field and into the robot? In prevou
         - Bands can break under defense
         \subitem
         \subitem
-We as a team have lots of experience with this method of intaking. As last year during the 2023-2024 season in Over Under, both our 15" and 24" bots used this method of intaking game elements. Rubber band solutions are quite tedious to work with as it requires many rubber bands to assemble. Our 15" Over Under robot utilized an intake that contacted above the game element last year to move it into the bot. See \ref{fig:over under intake}. This method of intaking is better used in games like Over Under, where the game element is not as predictable ie. a triangular ball.
+    \end{itemize}
+
+We as a team have lots of experience with this method of intaking. As last year during the 2023-2024 season in Over Under, both our 15" and 24" bots used this method of intaking game elements. Rubber band solutions are quite tedious to work with as it requires many rubber bands to assemble. Our 15" Over Under robot utilized an intake that contacted above the game element last year to move it into the bot. See \ref{fig:over under intake}. This method of intaking is better used in games like Over Under, where the game element is not as predictable; i.e., a triangular ball.
+
 \begin{figure}
     \centering
     \includegraphics[width=0.5\linewidth]{images/Intake Mechanisms/20240414_040956.jpg}
     \caption{Example rubber band roller intake setup.}
     \label{fig:over under intake}
 \end{figure}
-\end{itemize}
-    \item A series of compliant wheels that hover slightly above the game element.
+
+    \item \textit{A series of compliant wheels that hover slightly above the game element.}
     \begin{itemize}
         \item Pros
         \subitem 
@@ -145,19 +158,21 @@ We as a team have lots of experience with this method of intaking. As last year 
         - Much more compact
         \item Cons
         \subitem
-        - Harder to tune due to limited diameter of wheels and durometer
+        - Harder to tune due to limited diameter of wheels and durometer value
         \subitem
         \subitem
-        Yet another method of intaking game objects, a series of compliant wheels is commonly used by many Vex teams. Specifically, for disk-shaped objects like the rings this year. Many teams developed early season designs for these intakes. For example, AUBIE1 in thier robot in 24 hours design challenge created a basic design that uses this method of intaking rings \cite{bib:AUBIE24hrs}. See \ref{fig:AUBIE1 Intake} for an example of a team using this kind of intake mechanism.
+        Yet another method of intaking game objects, a series of compliant wheels is commonly used by many Vex teams. Specifically, for disk-shaped objects like the rings this year. Many teams developed early season designs for these intakes. For example, AUBIE1 in their robot in 24 hours design challenge created a basic design that uses this method of intaking rings \cite{bib:AUBIE24hrs}. See \ref{fig:AUBIE1 Intake} for an example of a team using this kind of intake mechanism.
+    \end{itemize}
+    
 \begin{figure}
-        \centering
-        \includegraphics[width=0.5\linewidth]{images/Intake Mechanisms/IntakeAubie.PNG}
+    \centering
+    \includegraphics[width=0.5\linewidth]{images/Intake Mechanisms/IntakeAubie.PNG}
         \caption{AUBIE1 flex wheel intake.}
-        \label{fig:AUBIE1 Intake}
-    \end{figure}
-        \end{itemize}
-    \item Plastic rollers, either static or slightly flexible.
-    \begin{enumerate}
+    \label{fig:AUBIE1 Intake}
+\end{figure}
+    
+    \item \textit{Plastic rollers, either static or slightly flexible.}
+        \begin{enumerate}
         \item A hard plastic hook
     \begin{itemize}
         \item Pros
@@ -187,24 +202,44 @@ We as a team have lots of experience with this method of intaking. As last year 
         \subitem
         \subitem
         In Vex Tipping Point, many teams saw themselves using a conveyor system that utilized static hooks, mounted similarly to the hero bot, to grab the center of the game element to intake it into the robot. A particular example that caught the teams' eye was from team 67101C 9MotorGang. This is an early season design for Tipping Point to pick up smaller rings into the bot via a hook mounted onto a chain \cite{bib:9motorgangTiP}. See \ref{fig:9motorintake} for a depiction of this mechanism in use. We believe that with some modifications, this design can be utilized to intake since we are working with rings.
-    \begin{figure}
+    \end{itemize}
+\end{enumerate}
+\end{enumerate}
+
+\begin{figure}
     \centering
     \includegraphics[width=0.5\linewidth]{images/Intake Mechanisms/9motorhookTiP.PNG}
     \caption{67101C Tipping Point Hook Intake.}
     \label{fig:9motorintake}
 \end{figure}
+
 \begin{figure}
-        \centering
-        \includegraphics[width=0.35\linewidth]{images/Intake Mechanisms/Disco-Angle Left view.png}
-        \caption{Driving Disco, 2022-2023 Vex Hero Bot.}
-        \label{fig:herobot}
-    \end{figure}
-        \end{itemize}
-    \end{enumerate}
-    \end{enumerate}
+    \centering
+    \includegraphics[width=0.35\linewidth]{images/Intake Mechanisms/Disco-Angle Left view.png}
+    \caption{Driving Disco, 2022-2023 Vex Hero Bot.}
+    \label{fig:herobot}
+\end{figure}
+
 \subsubsection{Design Matrix for Intake Solutions:}
 After analysis of multiple proposed intaking solutions, the team has created the following design matrix, ranking each solution in each category from 1 to 5.
 \textbf{INSERT DESIGN MATRIX HERE}
+
+
+\begin{table}
+    \centering
+    \begin{tabular}{c|c|c|c}
+              & Speed  & Efficiency  & Simplicity \\
+      Rubber Band Rollers  & 3 & 1 & 2 \\
+      Flex Wheels    &  3& 2 & 2\\
+      Tank Tread Flaps & 3 & 2 & 4 \\
+      Static Hoooks   & 4 & 4 & 5\\
+    \end{tabular}
+    \caption{Design Matrix For Intaking Methods}
+    \label{tab:my_label}
+\end{table}
+
+
+
 
 \subsubsection{Scoring Mechanisms}
 This section will contain our proposed solutions for scoring mechanisms that will allow us to score a ring from an unscored to scored position. We will provide a design matrix for all proposed mechanisms, weighing the pros and cons of all mechanisms discussed. Our brainstorming in this section will be referenced when we choose our robot design in the future
@@ -219,24 +254,95 @@ Once again building upon previous games, we will break this section up into diff
 \end{center}}
 
 The solutions below will all assume that the robot can already intake rings and can store them within the robot in some capacity when discussing the 'retrieval' of rings from within the bot.
-
 \begin{enumerate}
-    \item An arm with a claw mounted on the end of lift, Grabs rings \textbf{not} contained inside of the bot.
+    \item An arm with a claw mounted on the end of lift, grabs rings \textbf{not} contained inside of the bot.
     \begin{itemize}
         \item Pros
         \subitem
-        - can grab rings directly from field and place them in a scored position.
-        - easier to package as direction of expansion is clear.
+        - can grab rings directly from the field and place them in a scored position.
+        - easier to package as the direction of expansion is clear.
+        \subitem
+        - Can score two score rings at once.
     \end{itemize}
     \begin{itemize}
         \item Cons
         \subitem
-        - heavy due to needing a bar lift and reliable claw
-        \subitem
-        - Bands can break under defense
+        - heavy due to needing a bar lift and claw
         \subitem
         \subitem
-In this case of scoring wall stakes, this proposed mechanism could be the main mechanism of scoring on both wall stakes and mobile goals ie. the robot resembles a clawbot. An example of this would be from an early season design from team JHAWK, where they effectively make a clawbot to pickup rings, a trend from Vex Round Up many years ago \cit
+        In the case of scoring wall stakes, this proposed mechanism could be the main mechanism of scoring on both wall stakes and mobile goals i.e., the robot resembles a claw-bot. An example of this would be from an early season design from team JHAWK, where they effectively make a claw-bot to pickup rings, a trend from Vex Round Up many years ago \cite{bib:9motorgangHS}. See \ref{fig:JHAWK}
+    \end{itemize}
+    \item An arm with a claw mounted on the end of lift, grabs rings \textbf{contained} inside of the bot.
+    \begin{itemize}
+        \item Pros
+        \subitem - Rings are guaranteed to be placed within the claw since it will grab from within the bot
+        \item Cons
+        \subitem - heavy due to needing a bar lift and claw
+        \subitem\subitem
+        This kind of mechanism would most likely need to be able to either retrieve rings from inside the bot almost like a catapult, but without the velocity of one. What many teams we've seen do however, is a 'redirect' mechanism, A great our team has discussed is from 1010W. Their early season bot is capable of intaking rings, then redirecting the rings from their intake into their claw \cite{bib:1010claw}. See \ref{fig:1010bot} for an example.
+        
+    \end{itemize}
+    \end{enumerate}
+\begin{figure}
+    \centering
+    \begin{subfigure}{0.40\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{images/Scoring mechanisms/1010W redir.PNG}
+        \caption{1010W redirect mechanism}
+        \label{fig:redirect1010W}
+    \end{subfigure}
+    \begin{subfigure}{0.50\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{images/Scoring mechanisms/tenton.PNG}
+        \caption{1010W scoring two rings at once.}
+        \label{fig:tworing1010w}
+    \end{subfigure}
+    \caption{Redirect and scoring examples.}
+    \label{fig:1010bot}
+\end{figure}
+
+\subsubsection{\begin{center}
+    Methods of Scoring: Mobile Goals
+\end{center}}
+
+
+We will assume that our bot will have a method of picking up a mobile goal. following the formula of Vex Tipping Point robots, we believe that the most effective method of picking up a mobile goal is to have a pneumatically powered lever that tilts the goal onto the rear of the bot. As soon as the team saw the reveal of this year's design challenge, we all thought of a piston clamp as it was the most commonly used method of picking up goals. Moreover, teams as early as May were able to design clamps like these from 44252A \cite{}. See \ref{}. As such, we will immediately go into brainstorming mechanisms for scoring on mobile goals whilst it is clamped like discussed above.
+
+\begin{enumerate}
+    \item \textit{Using a hook conveyor to score on the top of the mobile goal}
+    \begin{itemize}
+        \item Pros
+        \subitem
+        - tuning seems like it will be dependent on how exactly we clamp onto the goal.
+        \subitem - hook can score consecutively
+    \end{itemize}
+    \begin{itemize}
+        \item Cons
+        \subitem
+        - conveyor chain can snap, rendering it useless.
+        \subitem
+        - conveyor traversing under the hang barrier
+        \subitem
+        - needs funneling
+        \subitem
+    \end{itemize}
+     \item \textit{Using a flexwheel hood to score onto the goal.}
+        \begin{itemize}
+            \item Pros
+            \subitem - more consistent force distribution when scoring
+            \item Cons
+            \subitem - heavy and complex
+            \subitem - requires much more maintenance
+        \end{itemize}
+\end{enumerate}
+
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{images/Scoring mechanisms/clawhs.PNG}
+    \caption{JHAWK Claw-bot.}
+    \label{fig:JHAWK}
+\end{figure}
 \subsection{Odometry}
 
 
@@ -362,14 +468,18 @@ realized that it was beyond our specifications given for the task, such as if we
 In our second iteration of the locking clamp, we slimmed down the components to 0.1 inches
 each and decided to print multiple pieces of each component. We would mesh the parts
 together so the mechanism would have a total thickness of 0.5 inches. This design ended up
-being too unstable and lacked rigidity, even with 100% infill of ABS filament. We quickly realized
+being too unstable and lacked rigidity, even with 100 percent infill of ABS filament. We quickly realized
 that the excessive space between each component was the cause of its fragility. So we decided
 to utilize that unused space by filling it with plastic, making the mechanism much stronger while
 still staying within 0.5 inches. This ended up as our final product.
 \newline
 
-Insert design schematics of the final product here
-
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{images/Subassemblies Drawings and Parts/Odom_Pod_Drawing.pdf}
+    \caption{Final drawing of the finished odometer pods}
+    \label{fig:Odom pod}
+\end{figure}
 
 after finalizing a clamping system we then begin to look toward a method to attach the product to the robot. We then prototyped and 3-D printed a prototype made of ABS plastic and realized that it was far too weak to hold
 the clamp. It lacked the necessary tensile strength and was to elastic making it less than ideal to support the goal rush
@@ -384,9 +494,6 @@ out of polycarbonate plastic we attached it to the clamp through the slot on the
 
 Insert images of the final design here
 
-
-\section{Design Selection}
-\subsection{Vision}
 \section{Miscellaneous}
 
 \pagebreak
@@ -627,9 +734,117 @@ Hunter and Juan added cross braces in both the back and front of the chassis. Se
 \end{figure}
 
 \subsection{11/23/34}
-    Today was highly focused on the rear of the chassis and then mogo mech. With the given c-channel raising the mobile goal to a point the conveyor subsystem could not score on the stake. a solution was thought of that removing the stand-off braces and replacing them with a 3d print would allow us to then cut down a section of the c channel in order to reach a appropriate height with the mogo mech. A mechanism is also needed in order to achieve a correct angle when clamping down on mobile goals. 
+    Today was highly focused on the rear of the chassis and then mogo mech. With the given c-channel raising the mobile goal to a point the conveyor subsystem could not score on the stake. A solution was thought of that removing the stand-off braces and replacing them with a 3d print would allow us to then cut down a section of the c channel in order to reach a appropriate height with the mogo mech. A mechanism is also needed in order to achieve a correct angle when clamping down on mobile goals. 
 
 \subsection{11/24/24}
+    Today was another day highly focused on the mogo mech. We opted to 3d print the fingers of the mogo mech in order to be able to get the proper angle when clamping to allow scoring. We also realized that the mogo mech was very easy to steal from so we started brainstorming on how to make the clamp lock tighter. 
+\subsection{11/27/24}
+    Now that we have a working mogo mech that has the proper geometry to score we began to work on the conveyor that carries the rings from the intake to the mobile goal. We are using cut ABS as our hooks to score onto the mogo, but realize we need something more flexible; we are planning on using 3d printed TPU hooks. We also started cloning the 24inch robot
+    
+\subsection{12/3/24}
+    Today we worked on mounting the brain 
+
+\subsection{12/4/24}
+
+\subsection{12/5/24}
+
+\subsection{12/6/24}
+
+\subsection{12/8/24}
+
+\subsection{12/9/24}
+
+\subsection{12/10/24}
+
+\subsection{12/11/24}
+
+\subsection{1/7/25}
+
+\subsection{1/8/25}
+
+\subsection{1/9/25}
+
+\subsection{1/11/25}
+    Today was the first prototype and iteration of a passive first tier hang  
+
+\subsection{1/16/25} scrimmed russellville
+    January 16th we decided to scrim a High school level team in our local area, by doing so we discovered a fatal flaw with our intake subsystem. By using a singular 1x1 angle bar it was immediately  bent when it came in contact with strong defense, which can be seen in \ref{fig:1-16-25 bent intake} The solution was in theory print a petg "brick" to fill in the empty space in order to make it more rigid. after the initial design it worked and was soon implemented as seen in \ref{fig:1-16-25 PETG Block}
+    
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.5\linewidth]{images/January/Bent intake.jpg}
+        \caption{Image from recording of the scrim with the bent intake highlighted in the circle.}
+        \label{fig:1-16-25 bent intake}
+    \end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{images/January/1-16-15 PETG Block.jpg}
+    \caption{PETG block implemented into intake subsystem}
+    \label{fig:1-16-25 PETG Block}
+\end{figure}
+
+
+
+\begin{table}
+    \caption{Wattage Test}
+    \centering
+    \begin{tabular}{|c|c|c|c|c|c|}
+        \hline
+        Trial & 1 & 2 & 3 & 4 & 5\\
+        \hline
+         Follow CAD & 1.8 & 1.7 & 1.9 & 1.8 & 1.7 \\
+         \hline
+         Teflon Removal& 1.2 & 1.4 & 1.2 & 1.3 & 1.1\\
+         \hline
+         Crush Washers& 0.9 & 0.93 & 0.91 & 0.89 & 0.92\\
+         \hline
+         Shave Bolt Heads& 0.86 & 0.85 & 0.87 & 0.86 & 0.89\\
+         \hline
+    \end{tabular}
+    
+    \label{tab:my_label}
+\end{table}
+
+
+\begin{table}
+    \caption{Goal Rush Clamp}
+    \centering
+    \begin{tabular}{|c|c|c|c|c|c|}
+        \hline
+        Trial & 1 & 2 & 3 & 4 & 5\\
+        \hline
+         Normal Clamp & 1 & 0 & 0 & 1 & 0 \\
+         \hline
+         Original Locking Clamp (1.5 inch) & 4 & 3 & 2 & 1 & 3\\
+         \hline
+         Thin Stacked Locking Clamp(3, 0.1 inch) & 4 & 2 & 3 & 3 & 2\\
+         \hline
+         Over Center Lock (0.5) & 5 & 5 & 5 & 5 & 5\\
+         \hline
+    \end{tabular}
+    \label{tab:my_label}
+\end{table}
+
+
+\begin{table}
+    \caption{Intake Design}
+    \centering
+    \begin{tabular}{|c|c|c|c|c|c|}
+        \hline
+        Trial & 1 & 2 & 3 & 4 & 5\\
+        \hline
+         CAD & 0 & 0 & 0 & 0 & 0 \\
+         \hline
+         Increase Length & 1 & 0 & 2 & 1 & 0\\
+         \hline
+         Change Diameter of Flex Wheels & 2 & 3 & 3 & 2 & 4\\
+         \hline
+         Change RPM & 5 & 5 & 5 & 5 & 5\\
+         \hline
+    \end{tabular}
+    \label{tab:my_label}
+\end{table}
 
 \addtocontents{toc}{\setcounter{tocdepth}{\defaulttocdepth}}
 \setcounter{tocdepth}{\defaulttocdepth}

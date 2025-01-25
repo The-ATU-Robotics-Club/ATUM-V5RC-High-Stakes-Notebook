@@ -61,3 +61,27 @@ Structurally, Braden also moved much of the GUI code into a separate class to be
 
 \subsection{11/8/2024}
 Braden added getters for the routine selector page, an important step in the creation of the interface to the GUI elements. 
+
+\subsection{11/8/2024}
+Braden added a method for writing to the log screen, necessary for later connecting the screen to the loggers. 
+
+\subsection{11/13/2024}
+Braden added several methods to support adding points to various series on the graph screen, as well as changing the range of the series. 
+
+\subsection{11/14/2024}
+Braden added methods to support placing points on the map screen. Braden also ported over the code for the GUI from the LVGL simulator to the PROS project. Additionally, Braden added a home screen image and an error screen image. 
+
+After the GUI was ported over, the rest of the project was retrofitted to support and make use of its features (at least for autonomous routine selection). 
+
+\subsection{11/15/2024}
+Braden removed several old files. Braden also connected the logger to the log screen, so now any message above Info level will be show on the screen. Braden also did some routine refactoring of the GUI code. 
+
+\subsection{11/21/2024}
+Braden did a basic rewrite of the task class in order to better name a few methods and change to only one background task (rather than the three that were supported before). Preferably, we will later have a solution that supports an arbitrary number of background tasks. 
+
+Braden and Preston also added a wrapper around the PROS implementation for motors. This was added to seamlessly support additional error checking and customize the class for our specific uses. 
+
+\subsection{11/22/2024}
+Braden prevented the logger from logging the same message several times by storing each message that is logged. Additionally, Braden tested that logging to the SD card was working as expected
+
+Braden also began retrofitting the previously existing error checking to the new logging system (pretty much only for the odometry). 

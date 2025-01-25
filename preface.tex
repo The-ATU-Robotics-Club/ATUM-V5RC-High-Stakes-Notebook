@@ -170,8 +170,46 @@ with the notebook.
 
 \chapter{Technology \& Methodology}
 \section{git/GitHub}
+Git is the version control software we use to manage versioning for any files and we use
+GitHub to host our repositories. Tracked files include both software and CAD files, as well
+as organizational documents such as our constitution. The use of GitHub became necessary
+for CAD after the discontinuation of GrabCAD, which we used in previous years.
+
+GitHub also provides several project management tools, such as GitHub Projects. A more detailed description of our usage of GitHub Projects can be found in the appendix,
+but in summary it acts as our software for Gantt charts and Kanban boards. 
+
+
+GitHub has instrumental not only in tracking the progress of tasks and who is responsible for completing them, but is also employed for some automation. For instance, this notebook uses GitHub Actions to automatically add changes to our GitHub Project (effectively tracking our Gantt chart and Kanban board), add the commit logs for all of our repositories, adding general, club meeting notes to this notebook, and adding the code repository to this notebook.
+\newline
+
 \section{Discord}
+Two years ago, we created a discord server that we could use to communicate between team members. Within this server, we have various channels that we use to record day-to-day things we do within our lab. It is how we announce team meetings, things that are needed to be done towards the robot, and how we keep record of the progress we make through taking pictures. Moreover, this is a quick and easy way to get a hold of team
+members and make sure everyone stays up to date on what is happening throughout the semester. 
+
+We additionally have several bots in the server to assist with certain functions related to the club. These bots include:
+\begin{itemize}
+\item Dyno: provides additional general discord commands.
+\item vexibot: provides team, tournament, and skills information for VRC.
+\item Compiler: compiles and runs provided snippets of code.
+\item ATUM’s Family Bot: provides support for adding to the order form. The ATUM’s Family Bot in particular was custom-made for the club by Braden two years ago.
+\end{itemize}
+
+With High Stakes, we have updated the server to better support a longer lifetime, with support for visitors and archiving. 
+\newline
+
+
 \section{Club and Team Organization}
+Our team consists of various members that all bring a different skill set to the table. We do
+not discriminate on who is allowed to join by race, gender, sexual orientation, major, or any
+other unique differences. Instead, we focus on building a positive environment that everyone
+can feel comfortable working in as a team. Through building off each other’s individual skill
+sets, we believe that we are able to create a productive robotics team. Within our team,
+different members are allowed to pick a role they feel most comfortable with, however, that
+does not withhold them from being allowed to help with any other role of the club.
+
+If you would like to learn more about our club organization (which, at the moment, is more or less the team organization), the constitution of our club is attached in this notebook in the appendix. 
+\newline 
+
 
 \chapter{Team Profile}
 \rightsidemember{Preston Diehl}{images/members/preston.jpg}{I forgor, \emoji{skull}.}{I am a programmer and driver for the team, focusing mainly on autonomous routines and strategy. I am a sophomore student studying computer science. I have been competing in VEX Robotics for around 4 years. I also volunteer at high school and middle school level tournaments. I enjoy the competition aspect of VEX and learning more about my field of study. 
@@ -197,17 +235,18 @@ with the notebook.
 
 \leftsidemember{Hunter Mathis}{images/members/hunter.jpg}{If it ain't broke, don't fix it.}{I am a builder/designer for the team, working wherever I am needed. I help CAD various parts for the robot that can replace the Vex parts we use. In addition, I serve as the ATU Robotics Club President, where I help ensure that progress is continually made, co-lead weekly club meetings, and look for potential sponsorship opportunities. I am a junior majoring in Mechanical Engineering and have been involved with Vex Robotics for the last three years.  }
 
-\rightsidemember{Ryan Nanthalangsy}{images/members/ryan.jpg}{Wait, we won? \emoji{skull}}{I am builder/designer for team helping where it is needed. I help Select different materials for different custom pieces we manufacture, along with helping with the manufacturing process for some of the pieces. I also serve as the ATU Robotics Club Treasurer, where I help secure funding for the organization along with ordering parts and securing materials for custom pieces. I am currently a junior majoring in mechanical engineering and have been involved in Vex robotics for 9 years, and am currently one of the Head refs in Arkansas.  }
+\rightsidemember{Ryan Nanthalangsy}{images/members/ryan.jpg}{Wait, we won?}{I am builder/designer for team helping where it is needed. I help Select different materials for different custom pieces we manufacture, along with helping with the manufacturing process for some of the pieces. I also serve as the ATU Robotics Club Treasurer, where I help secure funding for the organization along with ordering parts and securing materials for custom pieces. I am currently a junior majoring in mechanical engineering and have been involved in Vex robotics for 9 years, and am currently one of the Head refs in Arkansas.  }
 
 
 \leftsidemember{Cooper Stober}{images/members/cooper.jpg}{I'm not large I am just easier to spot in a crowd.}{I am a builder/designer for the team. I help with various things when I am needed. I am a freshman Mechanical Engineering major and I have 5 years of previous Vex experience and have had the opportunity to go to the World Championship the last three years.}
 
 \rightsidemember{Kavin Kannangara}{images/members/kavin.jpg}{I like things that go stututu and vroom vroom and wabapapapa}{My name is Kavin Kannangara I am a freshman at ATU studying Mechanical Engineering. I am a builder  I have always had a passion for robotics. So far I have been doing robotics for two years and have been to the World Championship both of those years. I also enjoy working on cars. I hope to learn a lot from the upperclassman in our organization and grow as an engineer through robotics.}
 
-\leftsidemember{Brandon Gallegos}{images/members/brandon.jpg}{}{}
+\leftsidemember{Brandon Gallegos}{images/members/brandon.jpg}{TRAKASSS HDSPM}{I serve our team as a builder and designer, assembling structures, designing 3D printed mounts for specific components, and more. This is my first year being a robotics club member. The thought of bringing my design ideas to life has consistently been a desire of mine, and robotics offers the perfect opportunity to apply my skills in a practical, engaging way. Being involved in robotics keeps me motivated and provides invaluable experience in engineering, pushing me to learn and grow with each task. For my studies, I am a junior Mechanical Engineering major minoring in Mathematics and pursing two associates degrees. As a hobby, I am a drumline member and avid music listener.}
 
+\rightsidemember{Juan Leon}{images/members/juan.jpg}{Red or blue?}{}
 
-
+\leftsidemember{Brady Bray}{images/members/brady.jpg}{Niebla, what you got?}{I am a builder for the team, helping talk through ideas and improvements for the bot and then bringing them to life. I am a junior majoring in Mechanical Engineering. Even though it is my first year doing VEX robotics, I believe it has already made an impact on communicating my ideas and being a better team member. VEX is helping me continue my journey of learning more, and I will strive to never stop.}
 
 
 
@@ -400,7 +439,7 @@ The three proposed ideas included:
     \item Creating two identical robots with slight variance in subsystems when needed
 \end{itemize}
 Each of these ideas presented various pros and cons for both match play and skills
-matches. Seeing that we needed both robots to be able to traverse around the field quickly,  clamp onto mobile goals, score on the wall stakes, and elevate at the end of the match, we decided to build two nearly identical robots that could accomplish these tasks. After careful consideration, we decided as a team to utilize a conveyor system that would score rings onto a mobile goal we have clamped on the rear end of the robot. In addition, we decided to incorporate a Ladybrown mechanism to score on the wall stakes. We plan to eventually achieve a tier three buddy hang but for now we are utilizing a tier one passive hang. Keeping the initial ideas in mind, we began to look into possible
+matches. Seeing that we needed both robots to be able to traverse around the field quickly,  clamp onto mobile goals, score on the wall stakes, and elevate at the end of the match, we decided to build two nearly identical robots that could accomplish these tasks. After careful consideration, we decided to utilize a conveyor system that would score rings onto a mobile goal we have clamped on the rear end of the robot. In addition, we decided to incorporate a Ladybrown mechanism to score on the wall stakes. We plan to eventually achieve a tier three buddy hang, however for now we are utilizing a tier one passive hang. Keeping the initial ideas in mind, we began to look into possible
 offensive and defensive strategies for both match play and skills matches.
 \subsection{Offensive Strategies During Matches}
 \begin{enumerate}
@@ -410,7 +449,7 @@ offensive and defensive strategies for both match play and skills matches.
     \subitem - grants the team an additional six points
     \subitem - improves of chances of winning close games
     \item Cons
-    \subitem - 
+    \subitem - There no obvious cons to gaining the bonus other then the possible violation of a rule
     \end{itemize}
     \item Gaining Autonomous Win Point
     \begin{itemize}
@@ -447,7 +486,9 @@ offensive and defensive strategies for both match play and skills matches.
 
 
 \subsection{Defensive Strategies During Matches}
+
 \begin{enumerate} 
+
     \item Defending Goals in Positive/Negative Corners
     \begin{itemize}
     \item Pros
@@ -456,6 +497,7 @@ offensive and defensive strategies for both match play and skills matches.
     \subitem - not having enough time to elevate at the end of the match
     \end{itemize}
     \item Screens
+    
     \begin{itemize}
     \item Pros
     \subitem - grants other driver more time to place or defend goals in corners
@@ -463,6 +505,7 @@ offensive and defensive strategies for both match play and skills matches.
     \subitem - not actively scoring during the time the screen is being placed
     \end{itemize}
     \item Tipping Over Either Color Scored Goals
+    
     \begin{itemize}
     \item Pros
     \subitem - can keep the opposing team from being able to place them back upright 
@@ -470,52 +513,58 @@ offensive and defensive strategies for both match play and skills matches.
     \subitem - might not be able to place in back up and put in the positive corner
     \end{itemize}
     \item Scoring Other Colored Rings on Mobile Goals and Placing in the Negative Corner During Autonomous Period
+    
     \begin{itemize}
     \item Pros 
     \subitem - can reduce the total score that the opposing team has
     \item Cons
     \subitem - increases the chance that the other team can place that goal into a positive corner 
     \end{itemize}
+    
 \end{enumerate}
 
 
 \subsection{Strategy for Skills Matches}
 \begin{enumerate} 
+
     \item Mobile Goal Scoring
     \begin{itemize}
     \item Pros
-    \subitem
+    \subitem - awards the team 1 point per ring and 3 for the top ring
+    \subitem - fastest way to score points
     \item Cons
-    \subitem
+    \subitem - can limit the time to elevate at the end of the game
     \end{itemize}
     \item Wall Stake Scoring
     \begin{itemize}
     \item Pros
-    \subitem
+    \subitem - chance to score additional points if goals are close to filling up
     \item Cons
-    \subitem
+    \subitem - difficult to line up properly and can waste time
     \end{itemize}
     \item Alliance Stake Scoring
     \begin{itemize}
     \item Pros
-    \subitem
+    \subitem - quick way to get 3 to 4 more points
     \item Cons
-    \subitem
-    \end{itemize}
+    \subitem - can take away time to score in other areas
+    \end{itemize} 
     \item High Stake Scoring 
     \begin{itemize}
     \item Pros
-    \subitem
+    \subitem - can add more points if both robots are elevated at max tier
     \item Cons
-    \subitem
+    \subitem - difficult to reach max elevation within the one minute time frame and score in other areas
     \end{itemize}
     \item Elevating During Endgame
-     \begin{itemize}
+    \begin{itemize}
     \item Pros
-    \subitem
+    \subitem - adds more points for different tier hangs
     \item Cons
-    \subitem
+    \subitem - can take away time from scoring on other field elements
+    \subitem - hard to be consistent at getting both bots at the same height within time
     \end{itemize}
 \end{enumerate}
+
 
 After detailing a list of possible match strategies, we started creating our approach to the first iteration of our design while adhering to the Engineering Design Process.
