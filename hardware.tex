@@ -114,7 +114,7 @@ So how exactly do we move a ring from on the field and into the robot? In prevou
     Methods of Intaking:
 \end{center}}
 \begin{enumerate}
-    \item A series of compliant rubber band rollers that grabbed a ring from the top, moving it into the robot.
+    \item A series of compliant rubber band rollers that grab a ring from the top, moving it into the robot.
     \begin{itemize}
         \item Pros
         \subitem
@@ -126,14 +126,117 @@ So how exactly do we move a ring from on the field and into the robot? In prevou
         - Rubber bands are complicated compared to alternatives
         \subitem
         - Bands can break under defense
+        \subitem
+        \subitem
+We as a team have lots of experience with this method of intaking. As last year during the 2023-2024 season in Over Under, both our 15" and 24" bots used this method of intaking game elements. Rubber band solutions are quite tedious to work with as it requires many rubber bands to assemble. Our 15" Over Under robot utilized an intake that contacted above the game element last year to move it into the bot. See \ref{fig:over under intake}. This method of intaking is better used in games like Over Under, where the game element is not as predictable ie. a triangular ball.
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{images/Intake Mechanisms/20240414_040956.jpg}
+    \caption{Example rubber band roller intake setup.}
+    \label{fig:over under intake}
+\end{figure}
+\end{itemize}
+    \item A series of compliant wheels that hover slightly above the game element.
+    \begin{itemize}
+        \item Pros
+        \subitem 
+        - Durability throughout a match
+        \subitem
+        - Much more compact
+        \item Cons
+        \subitem
+        - Harder to tune due to limited diameter of wheels and durometer
+        \subitem
+        \subitem
+        Yet another method of intaking game objects, a series of compliant wheels is commonly used by many Vex teams. Specifically, for disk-shaped objects like the rings this year. Many teams developed early season designs for these intakes. For example, AUBIE1 in thier robot in 24 hours design challenge created a basic design that uses this method of intaking rings \cite{bib:AUBIE24hrs}. See \ref{fig:AUBIE1 Intake} for an example of a team using this kind of intake mechanism.
+\begin{figure}
+        \centering
+        \includegraphics[width=0.5\linewidth]{images/Intake Mechanisms/IntakeAubie.PNG}
+        \caption{AUBIE1 flex wheel intake.}
+        \label{fig:AUBIE1 Intake}
+    \end{figure}
+        \end{itemize}
+    \item Plastic rollers, either static or slightly flexible.
+    \begin{enumerate}
+        \item A hard plastic hook
+    \begin{itemize}
+        \item Pros
+        \subitem
+        - The lightest option, compared to the options listed above. 
+        \subitem
+        - Much more compact, as it can be mounted inside the robot.
+        \item Cons
+        \subitem
+        - Needs lots of alignment as it needs to be used on a hollow disk
     \end{itemize}
-\end{enumerate}
-We as a team have lots of experience with this method of intaking. As last year during the 2023-2024 season in Over Under, both our 15" and 24" bots used this method of intaking game elements. Rubber band solutions are quite tedious to work with as it requires many rubber bands to assemble. Our 15" Over Under robot utilized 
+        \item A flat roller/flexible hook/Vex roller
+    \begin{itemize}
+        \item Pros
+        \subitem
+        - Among the lightest option
+        \subitem
+        - Can flex a bit compared to a hard roller/hook
+        \item Cons
+        \subitem
+        - Much harder to tune with flat edge
+        \subitem
+        - Needs alignment
+        \subitem
+        \subitem
+        In previous games, the use of a hook or flap that is mounted on a conveyor system has been used to intake both ring-shaped objects and disks. None of which however was used on the rings of this years' design challenge, at least on the Vex V5 system. Notably, Vex Spin Up and Vex Tipping Point saw the use of these kinds of intake systems to move similarly-shaped objects into a robot. For example, the Vex hero bot: Driving Disco used a conveyor system to intake game elements \cite{bib:DDisco}. See \ref{fig:herobot} for this intake example.
+        \subitem
+        \subitem
+        In Vex Tipping Point, many teams saw themselves using a conveyor system that utilized static hooks, mounted similarly to the hero bot, to grab the center of the game element to intake it into the robot. A particular example that caught the teams' eye was from team 67101C 9MotorGang. This is an early season design for Tipping Point to pick up smaller rings into the bot via a hook mounted onto a chain \cite{bib:9motorgangTiP}. See \ref{fig:9motorintake} for a depiction of this mechanism in use. We believe that with some modifications, this design can be utilized to intake since we are working with rings.
+    \begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{images/Intake Mechanisms/9motorhookTiP.PNG}
+    \caption{67101C Tipping Point Hook Intake.}
+    \label{fig:9motorintake}
+\end{figure}
+\begin{figure}
+        \centering
+        \includegraphics[width=0.35\linewidth]{images/Intake Mechanisms/Disco-Angle Left view.png}
+        \caption{Driving Disco, 2022-2023 Vex Hero Bot.}
+        \label{fig:herobot}
+    \end{figure}
+        \end{itemize}
+    \end{enumerate}
+    \end{enumerate}
+\subsubsection{Design Matrix for Intake Solutions:}
+After analysis of multiple proposed intaking solutions, the team has created the following design matrix, ranking each solution in each category from 1 to 5.
+\textbf{INSERT DESIGN MATRIX HERE}
+
 \subsubsection{Scoring Mechanisms}
-This section will contain our proposed solutions for a scoring mechanism along with a design matrix for all proposed mechanisms.
+This section will contain our proposed solutions for scoring mechanisms that will allow us to score a ring from an unscored to scored position. We will provide a design matrix for all proposed mechanisms, weighing the pros and cons of all mechanisms discussed. Our brainstorming in this section will be referenced when we choose our robot design in the future
 
 
+We've already discussed possible intaking soultions, but how exactly will we approach the challenge of scoring? As discussed in chapter \ref{chapter:Game Overview} of this engineering notebook, we are limited to holding up to two rings at a time and this must be considered for scoring mechanisms proposed in this section.
 
+
+Once again building upon previous games, we will break this section up into different cases: Wall stakes and mobile goals.
+\subsubsection{\begin{center}
+    Methods of Scoring: Wall Stakes
+\end{center}}
+
+The solutions below will all assume that the robot can already intake rings and can store them within the robot in some capacity when discussing the 'retrieval' of rings from within the bot.
+
+\begin{enumerate}
+    \item An arm with a claw mounted on the end of lift, Grabs rings \textbf{not} contained inside of the bot.
+    \begin{itemize}
+        \item Pros
+        \subitem
+        - can grab rings directly from field and place them in a scored position.
+        - easier to package as direction of expansion is clear.
+    \end{itemize}
+    \begin{itemize}
+        \item Cons
+        \subitem
+        - heavy due to needing a bar lift and reliable claw
+        \subitem
+        - Bands can break under defense
+        \subitem
+        \subitem
+In this case of scoring wall stakes, this proposed mechanism could be the main mechanism of scoring on both wall stakes and mobile goals ie. the robot resembles a clawbot. An example of this would be from an early season design from team JHAWK, where they effectively make a clawbot to pickup rings, a trend from Vex Round Up many years ago \cit
 \subsection{Odometry}
 
 
