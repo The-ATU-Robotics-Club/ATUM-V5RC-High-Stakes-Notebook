@@ -73,9 +73,50 @@ Torque scores are derived similarly to speed: assumed equivalent except for X wi
 analogous reasoning. The scores for simplicity are ranks. Tank is clearly the most straightforward design, with no special concerns. Next is mecanum, where the main concern is each wheel being independently-powered (and the additional width). Then H which requires an additional wheel in the center of the robot. Then X which requires each wheel be independently powered and offset by 45\degree. Finally, bogie would require two additional center wheels, each wheel be independently-powered, and an additional linkage. Strafing is simply considered as a boolean value. 
 \pagebreak
 \section{Drivetrain design selection}
+This year, our goal is to create a drive that can quickly move around the field whilst still
+having the torque necessary to play defensive. Considering the many drives listed in the
+initial design matrix \ref{tab:drive design matrix}. The most simple of the drives was the tank drive, scoring highly in simplicity.
 
 
-
+Last season, the team ean tank drives on both bots. With the tank being the most popular drive type and
+the most familiar drive type to the team, we believe that a tank drive offers the most simple
+yet effective solution for the 15” and 24". An X and
+he H drive are simply too bulky for the 15”. Due to the comfort and familiarity with the
+tank drive, the 15” design will be a tank drive.
+\subsection{Problem Statement:}
+Identify a desirable wheel size and gear ratio for the robot.
+\subsubsection{Solution requirements:}
+\begin{itemize}
+    \item Must have at least 6 wheels with one traction wheel for stable defense.
+    \item Must be faster than a direct-drive 200 RPM green cartridge.
+    \item Must be powered by a 600 RPM cartridge.
+\end{itemize}
+\subsubsection{200 RPM vs 600 RPM:}
+There are many combinations of wheel sizes and gear ratios. However, with the 15” robot,
+we want a drive that will be compact and balanced. Utilizing a 200 RPM green cartridge,
+we would need to have a speed ratio on the gear train. This is not ideal for a 6-motor
+drive. Additionally, green cartridges have more gear reduction internally, thus they have
+more friction. Blue cartridges have less of a gear reduction thus have less friction from there
+being less moving parts. Moreover, we will be able to gear the drive for torque, resulting in
+more compact gearing. This is ideal for a compact drive base.
+\subsubsection{The Design:}
+After many hours of CADing, the following was concluded:
+\begin{itemize}
+    \item The drive will be 450 RPM powered by a 36T gear driving a 48T gear for torque
+    \item It will have 8 wheels total
+\end{itemize}
+\section{Chassis Design Selection:}
+\subsection{Problem Statement:}
+Design a chassis robust enough to withstand the shock of heavy defense and the weight of a mobile goal.
+\subsubsection{Solution:}
+Basing this off of our descore bot experiment last year, we really like the idea of having 8 motors this year whilst having enough room for critical components.
+\subsubsection{Full competition Chassis CAD}
+\
+\begin{itemize}
+    \item Contains room for odometers
+    \item Contains low rear for a mobile goal
+    \item Has an open front for intake
+\end{itemize}
 \begin{figure} [h!]
     \centering
     \begin{subfigure}{0.45\linewidth}
@@ -221,10 +262,7 @@ We as a team have lots of experience with this method of intaking. As last year 
 \end{figure}
 
 \subsubsection{Design Matrix for Intake Solutions:}
-After analysis of multiple proposed intaking solutions, the team has created the following design matrix, ranking each solution in each category from 1 to 5.
-\textbf{INSERT DESIGN MATRIX HERE}
-
-
+After analysis of multiple proposed intaking solutions, the team has created the following design matrix, ranking each solution in each category from 1 to 5. See \ref{tab:intaketab}.
 \begin{table}
     \centering
     \begin{tabular}{c|c|c|c}
@@ -235,7 +273,7 @@ After analysis of multiple proposed intaking solutions, the team has created the
       Static Hoooks   & 4 & 4 & 5\\
     \end{tabular}
     \caption{Design Matrix For Intaking Methods}
-    \label{tab:my_label}
+    \label{tab:intaketab}
 \end{table}
 
 
@@ -737,47 +775,113 @@ Hunter and Juan added cross braces in both the back and front of the chassis. Se
     Today was highly focused on the rear of the chassis and then mogo mech. With the given c-channel raising the mobile goal to a point the conveyor subsystem could not score on the stake. A solution was thought of that removing the stand-off braces and replacing them with a 3d print would allow us to then cut down a section of the c channel in order to reach a appropriate height with the mogo mech. A mechanism is also needed in order to achieve a correct angle when clamping down on mobile goals. 
 
 \subsection{11/24/24}
-    Today was another day highly focused on the mogo mech. We opted to 3d print the fingers of the mogo mech in order to be able to get the proper angle when clamping to allow scoring. We also realized that the mogo mech was very easy to steal from so we started brainstorming on how to make the clamp lock tighter. 
+    Today was another day highly focused on the mogo mech. We opted to 3d print the fingers of the mogo mech in order to be able to get the proper angle when clamping to allow scoring. A piece called the "anvil"(\ref{fig:1-24-25 Anvil}) was printed and implemented in order to achieve the correct angle for the mogo mech. 
+    
+    \begin{figure} [h!]
+        \centering
+        \includegraphics[width=0.5\linewidth]{images/November/11-24-25 Anvil.jpg}
+        \caption{"Anvil" custom piece in order to acheive a correct clamping angle}
+        \label{fig:1-24-25 Anvil}
+    \end{figure}
+    
 \subsection{11/27/24}
-    Now that we have a working mogo mech that has the proper geometry to score we began to work on the conveyor that carries the rings from the intake to the mobile goal. We are using cut ABS as our hooks to score onto the mogo, but realize we need something more flexible; we are planning on using 3d printed TPU hooks. We also started cloning the 24inch robot
+    Now that we have a working mogo mech that has the proper geometry to score we began to work on the conveyor that carries the rings from the intake to the mobile goal. We are using cut ABS as our hooks to score onto the mogo, but realize we need something more flexible; we are planning on using 3d printed TPU hooks. We also started cloning the 24inch robot both can be seen in \ref{fig:11-27-25 Side View} and \ref{fig:11-27-25 mogo mech}
+    
+    \begin{figure} [h!]
+        \centering
+        \includegraphics[width=0.5\linewidth]{images/November/11-27-25 Ring stake thing.jpg}
+        \caption{side view of the conveyor system with the new abs pieces.}
+        \label{fig:11-27-25 Side View}
+    \end{figure}
+
+    \begin{figure} [h!]
+        \centering
+        \includegraphics[width=0.5\linewidth]{images/November/1-27-25 Built mogo clamp.jpg}
+        \caption{Assembled prototype mogo mech.}
+        \label{fig:11-27-25 mogo mech}
+    \end{figure}
     
 \subsection{12/3/24}
-    Today we worked on mounting the brain 
+    Today we worked on mounting the brain, air tank, battery, radio, and wiring; to make the robot testable. We also worked on making the intake and the conveyor belt sync up and bracing the conveyor. Another think we worked on was making a tensioner to make the rings hook on the conveyor belt. The prototyped working intake can be seen in \ref{fig:12-3-24} and both the intake and conveyor being synced can be seen in \ref{fig:12-3-25 Synced intake adn convyeor}
+
+\begin{figure} [h!]
+    \centering
+    \includegraphics[width=0.5\linewidth]{images/December/12-3-25 Working Intake.jpg}
+    \caption{Image of a prototype working intake that syncs with the conveyor.}
+    \label{fig:12-3-24}
+\end{figure}
+
+\begin{figure} [h!]
+    \centering
+    \includegraphics[width=0.5\linewidth]{images/December/12-3-25 Fully working intake and conveyor.jpg}
+    \caption{Fully working intake and conveyor that are synced}
+    \label{fig:12-3-25 Synced intake adn convyeor}
+\end{figure}
+    
 
 \subsection{12/4/24}
+    We started to brainstorm what a ladybrown would look like on a bot. Attempting to still have a open conveyor through the middle of the bot in order to score on mobile goal stakes. \ref{fig:enter-label} shows what a lady brown could possibly be.
 
-\subsection{12/5/24}
+\begin{figure} [h!]
+    \centering
+    \includegraphics[width=0.5\linewidth]{images/December/12-4-14 Lady brown brainstorm.jpg}
+    \caption{Brainstorm of Lady brown arms in order to score on wallstakes.}
+    \label{fig:enter-label}
+\end{figure}
 
 \subsection{12/6/24}
+    Today we worked on the lady brown mech, we were able to make it fit within the 15 inch sizing constraint we realized the static holder for the rings will not work when trying to use our conveyor belt to load them. We are brainstorming a way to make the ring holder rotate as we open the arm. 
 
 \subsection{12/8/24}
-
+    We worked on mounting pneumatics to the lady brown which allowed us to score on the wall stakes while still being able to load from the conveyor belt. We also worked on CADing the license plates and plate holders. 
 \subsection{12/9/24}
+    We worked on 3d printing the funnel system for our intake, which involves a ramp and two side funnel that box the c-channels on the front of the robot. Today we also 3d printed our hooks out of TPU which turned out to be very beneficial and we were able to score almost every ring. 
 
-\subsection{12/10/24}
+\subsection{12/11/24} We were able to finalize the build of the 15 inch robot by adding the odometry wheels and were able to let our programmer work on programming over the winter.
 
-\subsection{12/11/24}
-
-\subsection{1/7/25}
+\subsection{1/7/25} Coming back off of winter break we were able to jump right in and start building the clone robot we also were able to work on a CAD that would reroute some of the buttons on the controller to the back making it easier for the driver to have full control of the robot at all times. 
 
 \subsection{1/8/25}
+    Conveyor chassis's were manufactured from 1/8th aluminum sheet along with the intake brace both can be seen in \ref{fig:1-8-25 intake Brace} and \ref{fig:1-8-25 Conveyor chassis}. Once manufactured and cleaned it was then implemented with the intake brace, ring guide in order to fully finish the conveyor sub-system for the robot which is \ref{fig:1-8-25 Conveyor}
+    
+\begin{figure} [h!]
+    \centering
+    \includegraphics[width=0.5\linewidth]{images/January/1-18-25 Conveyor chassis.jpg}
+    \caption{Cnc Conveyor chassis from 1/8th aluminum sheet}
+    \label{fig:1-8-25 Conveyor chassis}
+\end{figure}
+
+\begin{figure} [h!]
+    \centering
+    \includegraphics[width=0.5\linewidth]{images/January/1-8-25 Intake Brace.jpg}
+    \caption{Intake Brace from same aluminum sheet as Conveyor chassis}
+    \label{fig:1-8-25 intake Brace}
+\end{figure}
+
+\begin{figure} [h!]
+    \centering
+    \includegraphics[width=0.5\linewidth]{images/January/1-8-25 Conveyor.jpg}
+    \caption{Fully assembled Conveyor subsystem for the 15in Robot.}
+    \label{fig:1-8-25 Conveyor}
+\end{figure}
+
 
 \subsection{1/9/25}
-
+    We began changing the lady brown geometry in order to fit custom pieces that were cad earlier the week. Both robots received the upgrade although with a slight differences due to the needed changes from design specifications. 
 \subsection{1/11/25}
-    Today was the first prototype and iteration of a passive first tier hang  
+    Today was the first prototype and iteration of a passive first tier hang. A total of 5 prototypes were made before a successful design was made. Due to the nature of the documentation videos were taken per attempt of the hang and another section for documentation videos will be added in the future. 
 
 \subsection{1/16/25} scrimmed russellville
     January 16th we decided to scrim a High school level team in our local area, by doing so we discovered a fatal flaw with our intake subsystem. By using a singular 1x1 angle bar it was immediately  bent when it came in contact with strong defense, which can be seen in \ref{fig:1-16-25 bent intake} The solution was in theory print a petg "brick" to fill in the empty space in order to make it more rigid. after the initial design it worked and was soon implemented as seen in \ref{fig:1-16-25 PETG Block}
     
-    \begin{figure}
+    \begin{figure} [h!]
         \centering
         \includegraphics[width=0.5\linewidth]{images/January/Bent intake.jpg}
         \caption{Image from recording of the scrim with the bent intake highlighted in the circle.}
         \label{fig:1-16-25 bent intake}
     \end{figure}
 
-\begin{figure}
+\begin{figure} [h!]
     \centering
     \includegraphics[width=0.5\linewidth]{images/January/1-16-15 PETG Block.jpg}
     \caption{PETG block implemented into intake subsystem}
@@ -803,7 +907,7 @@ Hunter and Juan added cross braces in both the back and front of the chassis. Se
          \hline
     \end{tabular}
     
-    \label{tab:my_label}
+    \label{tab:Wattagetest}
 \end{table}
 
 
@@ -823,7 +927,7 @@ Hunter and Juan added cross braces in both the back and front of the chassis. Se
          Over Center Lock (0.5) & 5 & 5 & 5 & 5 & 5\\
          \hline
     \end{tabular}
-    \label{tab:my_label}
+    \label{tab:GoalRushClamp}
 \end{table}
 
 
@@ -843,7 +947,7 @@ Hunter and Juan added cross braces in both the back and front of the chassis. Se
          Change RPM & 5 & 5 & 5 & 5 & 5\\
          \hline
     \end{tabular}
-    \label{tab:my_label}
+    \label{tab:IntakeDesign}
 \end{table}
 
 \addtocontents{toc}{\setcounter{tocdepth}{\defaulttocdepth}}

@@ -82,6 +82,33 @@ Braden did a basic rewrite of the task class in order to better name a few metho
 Braden and Preston also added a wrapper around the PROS implementation for motors. This was added to seamlessly support additional error checking and customize the class for our specific uses. 
 
 \subsection{11/22/2024}
-Braden prevented the logger from logging the same message several times by storing each message that is logged. Additionally, Braden tested that logging to the SD card was working as expected
+Braden prevented the logger from logging the same message several times by storing each message that is logged. Additionally, Braden tested that logging to the SD card was working as expected. There was also an issue with the log screen: updating it was so slow it would cause lag with the controls. This was due to the LVGL object we used for the text. We used a textarea, when this seems to be intended for user input. Braden corrected this issue by changing it to a simple text object. 
 
 Braden also began retrofitting the previously existing error checking to the new logging system (pretty much only for the odometry). 
+
+\subsection{12/8/2024}
+Braden significantly refactor the code for the Task parent class and the Robot parent class. 
+
+The Task class can now support an arbitrary number of background tasks functions, rather than one or a limited amount. Though, technically, it is limited by the max number of tasks supported by PROS, we will never realistically reach this limit. 
+
+The Robot class is now setup to centralize where autonomous routines are developed. Now, the name of routines and their behavior is specified in only one location and updates in the GUI and for the robot. 
+
+The use of preprocessor macro statements were employed to make this cleaner to use. While not typically good practice, this is a specific scenario where Braden deemed it worthwhile. 
+
+Braden also did a basic rewrite of the Remote class to support the new namespaces provided with PROS 4 and generally make the development of controls easier. 
+
+\subsection{12/10/2024}
+Braden added anti-jam code to the intake. It is based off of a timer and a "standstill" threshold. Everytime we begin intaking, the timer starts and, when it gets past its specified time, the intake begins checking if its velocity has dropped below the given threshold. If it does, it is considered jammed and briefly outtakes. 
+
+\subsection{12/11/2024}
+Braden added in color sorting to the intake. It works fairly simple, when the color sensor sees something, if it isn't our color intake until it doesn't see it and then briefly outtake. By inserting 20 rings into the intake, we have found that it successfully sorts roughly 95\% of the rings we intake. 
+
+\subsection{12/16/2024}
+Braden changed the odometry calculation to make use of exponential pose estimation. This method essentially takes into account turning dynamics during tracking to provide a more accurate estimate (see \cite{bib:controlinfrc} for further elaboration).
+
+In addition to the arc-length estimation we perform and the odometers Collin produced, after driving haphazardly for about 3 minutes, the tracking seemed to remain accurate. We determined this using the map on the GUI. 
+
+Braden also retrieved the robot to bring home during winter break for additional testing.
+
+\subsection{12/17/2024}
+Braden greatly refactor the GUI away from its God class form into several, modular classes. While the code remains functionally the same, this was necessary to maintain flexibility (and probably robustness, since this arrangement allows easier debugging). 
