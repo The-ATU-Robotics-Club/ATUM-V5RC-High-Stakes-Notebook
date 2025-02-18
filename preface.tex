@@ -19,7 +19,7 @@ reasons:
 \end{itemize}
 This notebooks format is inspired heavily by a template provided by Purdue
 SIGBots \cite{bib:purduenotebook} and an open source controls engineering
-textbook by Tyler Veness \cite{bib:controlinfrc} (which will probably be
+textbook by Tyler Veness \cite{bib:controlinfrc} (which will be
 referenced again).
 \section{Formatting}
 This notebook is presently divided into several parts which will now be
@@ -41,7 +41,7 @@ meeting note section of the appendix and the "logs" in each chapter should be
 especially considered. This notebook's version history was recorded using git
 and was distributed using GitHub. \textbf{To ensure that the notebook was made
       alongside the rest of the project, the commit history of the notebook repository
-      should be attached. Additionally, the following QR code leads to the notebook
+      is attached. Additionally, the following QR code leads to the notebook
       repository.}
 
 \pagebreak
@@ -53,13 +53,13 @@ and was distributed using GitHub. \textbf{To ensure that the notebook was made
       \vspace*{40pt}
       \url{https://github.com/The-ATU-Robotics-Club/ATUM-V5RC-High-Stakes-Notebook}
 
-      \textit{Leads to the GitHub repository for this notebook, it should be public for this competition.}
+      \textit{The link above leads to the GitHub repository for this notebook, it is already public for this competition.}
 
-      \textit{If we have forgotten to change the visibility of the repository, the commit history should also be attached.}
+      \textit{If there is any problems accessing the link, the commit history is also attached.}
 
       The PDF version may be preferred for reading, as the table of contents
       provides hyperlinks to various sections you will have to download the
-      file, though. See the "releases" for the current PDF file.
+      file. See the "releases" for the current PDF file.
       \vfill
 \end{center}
 \pagebreak
@@ -68,16 +68,14 @@ and was distributed using GitHub. \textbf{To ensure that the notebook was made
 \section{Log}
 This section deals with major changes to the format or workflow of this notebook
 (not new entries). If the format of this notebook changes substantially, or a
-new tool is implemented in its development, it should be mentioned here. These
-changes are quite different from the rest of the design process, so notes of
-this variety are isolated here.
+new tool is implemented in its development, it should be mentioned here. Notes of this variety are isolated here since these changes are quite different from the rest of the design process. 
 \subsection{6/13/2023}
 Set up beginning of notebook and the backbone for future entries. Add a command
 for inserting figures, \sout{such as:} (removed; see 8/9/2024)
 \subsection{6/14/2023}
 Finalize basic setup and style for the notebook.
 \subsection{6/15/2023}
-Began using LTeX \cite{bib:ltex} extension for spell and grammar checks. Reset
+Began using \LaTeX{} \cite{bib:ltex} extension for spell and grammar checks. Reset
 chapter number with each part.
 \subsection{6/16/2023}
 Created a python script for generating \LaTeX{} for design matrices and a
@@ -92,12 +90,12 @@ Additionally, this undertaking was a good learning experience for generating
 \LaTeX{} files for further automation as well as gaining access to other private
 organization repositories in GitHub actions. The initial solution for the latter
 involved using a Personal Authentication Token (PAT) which is akin to sharing
-your password around, insecure. The final solution involves using Deploys Keys
+your password around. The final solution involves using Deploys Keys
 and SSH which is much more secure.
 \subsection{6/29/2023}
 Add an automatic workflow for adding changes to the GitHub Project to the
 appendix. A primary goal for this notebook is to centralize organization and
-documentation, so that a comprehensive record of the project is provided. This
+documentation in order to provide a comprehensive record of the project. This
 workflow will ensure we do not forget to update the status of our project board
 and timeline in the notebook.
 \subsection{7/6/2023}
@@ -122,8 +120,7 @@ Reformat how images appear in the notebook. Add special a format for inserting
 pdfs. Combine the 15" and 24" parts into one hardware part. Greatly decrease
 length of appendix by reducing font size. Improve the table of contents layout.
 \subsection{7/28/2024}
-We have decided to switch from using VSCode (with extensions) and GitHub for
-writing the \LaTeX{} for the notebook, to using an online editor called Overleaf
+We have decided to switch from using VSCode (with extensions) and GitHub to using an online editor called Overleaf for writing the \LaTeX{} for the notebook. 
 \cite{bib:overleaf}. This was a pretty clear cut decision, with benefits
 including:
 \begin{itemize}
@@ -137,8 +134,8 @@ including:
       \item Built in spellcheck (and easier dictionary support) and text wrapping.
       \item And much more...
 \end{itemize}
-It really is just better in every way. It does require a subscription, but we
-unanimously considered this a worthy expense. Work in VSCode will pretty much
+Overall, Overleaf makes it much easier to work on the notebook in larger groups. It does require a subscription, but we
+unanimously agreeded this a worthy expense. Work in VSCode will pretty much
 be relegated to working with the GitHub workflows.
 \subsection{7/31/2024}
 Improved the look of the commit log and gave up on automating changing GitHub
@@ -154,9 +151,8 @@ Added a workflow for quickly adding all the files from our code repository into 
 notebook. Bringing all the files over manually before was laborsome and wasted a lot
 of time that could have been dedicated to elaborating on other topics.
 \subsection{8/7/2024}
-Greatly improve the formatting for the team profile. It used to be just a list of
-names, photos, and biographies that went on far too long. Significantly shortened
-and better looking.
+Greatly improve the formatting for the team profile. It used to be a list of
+names, photos, and biographies that was far too run-on, this significantly shortened and made the notebook more visually pleasing. 
 \subsection{8/9/2024}
 Commit to the "floating" nature of images; removing the previous command for inserting
 images and working on the formatting for figures and cross references. Similar changes,
@@ -179,11 +175,11 @@ GitHub also provides several project management tools, such as GitHub Projects. 
 but in summary it acts as our software for Gantt charts and Kanban boards. 
 
 
-GitHub has instrumental not only in tracking the progress of tasks and who is responsible for completing them, but is also employed for some automation. For instance, this notebook uses GitHub Actions to automatically add changes to our GitHub Project (effectively tracking our Gantt chart and Kanban board), add the commit logs for all of our repositories, adding general, club meeting notes to this notebook, and adding the code repository to this notebook.
+GitHub has been instrumental not only in tracking the progress of tasks and who is responsible for completing them, but is also employed for some automation. For instance, this notebook uses GitHub Actions to automatically add changes to our GitHub Project (effectively tracking our Gantt chart and Kanban board), add the commit logs for all of our repositories, adding general club meeting notes and the code repository to this notebook.
 \newline
 
 \section{Discord}
-Two years ago, we created a discord server that we could use to communicate between team members. Within this server, we have various channels that we use to record day-to-day things we do within our lab. It is how we announce team meetings, things that are needed to be done towards the robot, and how we keep record of the progress we make through taking pictures. Moreover, this is a quick and easy way to get a hold of team
+Three years ago, we created a discord server that we could use to communicate between team members. Within this server, we have various channels that we use to record day-to-day activities within our lab. It is how we announce team meetings, things that are needed to be done towards the robot, and how we keep record of the progress we make through taking pictures. Moreover, this is a quick and easy way to get a hold of team
 members and make sure everyone stays up to date on what is happening throughout the semester. 
 
 We additionally have several bots in the server to assist with certain functions related to the club. These bots include:
@@ -191,7 +187,7 @@ We additionally have several bots in the server to assist with certain functions
 \item Dyno: provides additional general discord commands.
 \item vexibot: provides team, tournament, and skills information for VRC.
 \item Compiler: compiles and runs provided snippets of code.
-\item ATUM’s Family Bot: provides support for adding to the order form. The ATUM’s Family Bot in particular was custom-made for the club by Braden two years ago.
+\item ATUM’s Family Bot: provides support for adding to the order form. The ATUM’s Family Bot in particular was custom-made for the club by Braden three years ago.
 \end{itemize}
 
 With High Stakes, we have updated the server to better support a longer lifetime, with support for visitors and archiving. 
@@ -207,7 +203,7 @@ sets, we believe that we are able to create a productive robotics team. Within o
 different members are allowed to pick a role they feel most comfortable with, however, that
 does not withhold them from being allowed to help with any other role of the club.
 
-If you would like to learn more about our club organization (which, at the moment, is more or less the team organization), the constitution of our club is attached in this notebook in the appendix. 
+If you would like to learn more about our club organization, the constitution of our club is attached in this notebook in the appendix. 
 \newline 
 
 
@@ -217,7 +213,7 @@ If you would like to learn more about our club organization (which, at the momen
 
 \leftsidemember{Bo Huey}{images/members/bo.jpg}{Silksong 2025 confirmed.}{My name is Bo Huey. I’m a freshman majoring in biochemistry and I’m a programmer for the team. My main contribution has been working on the skills autonomous with another programmer, Preston. I also help middle and high school level tournaments by scorekeeping or judging. I’ve been in VEX for two years now, starting in my senior year of High school. I’ve really enjoyed the games and club itself as even though I’m a biochemistry major I can still keep my interest in programming alive.}
 
-\rightsidemember{Everett Otis}{images/members/everett.jpg}{Fee-fi-fo-fum, there goes another one.}{I am a scout and strategist, working primarily on scouting teams we are to face at tournaments, and helping to develop the most optimal skills routes. I am also the social relations manager, recruiting future members and helping run local tournaments. I am a sophomore majoring in computer science and minoring in mathematics. I’ve been competing in Vex since my junior year of high school, making this my fourth year.}
+\rightsidemember{Everett Otis}{images/members/everett.jpg}{Safe to say I'm the biggest, the largest}{I am a scout and strategist, working primarily on scouting teams we are to face at tournaments, and helping to develop the most optimal skills routes. I am also the social relations manager, recruiting future members and helping run local tournaments. I am a sophomore majoring in computer science and minoring in mathematics. I’ve been competing in Vex since my junior year of high school, making this my fourth year.}
 
 \leftsidemember{Braden Pierce}{images/members/braden.jpg}{Where's the money, Skyler?}{ I am a programmer for the team, working primarily on the lower
     end side of the software; creating the tools and systems for developing our
@@ -240,7 +236,7 @@ If you would like to learn more about our club organization (which, at the momen
 
 \leftsidemember{Cooper Stober}{images/members/cooper.jpg}{I'm not large I am just easier to spot in a crowd.}{I am a builder/designer for the team. I help with various things when I am needed. I am a freshman Mechanical Engineering major and I have 5 years of previous Vex experience and have had the opportunity to go to the World Championship the last three years.}
 
-\rightsidemember{Kavin Kannangara}{images/members/kavin.jpg}{I like things that go stututu and vroom vroom and wabapapapa}{My name is Kavin Kannangara I am a freshman at ATU studying Mechanical Engineering. I am a builder  I have always had a passion for robotics. So far I have been doing robotics for two years and have been to the World Championship both of those years. I also enjoy working on cars. I hope to learn a lot from the upperclassman in our organization and grow as an engineer through robotics.}
+\rightsidemember{Kavin Kannangara}{images/members/kavin.jpg}{I like things that got stututu and vroom vroom and wabapapapa}{My name is Kavin Kannangara I am a freshman at ATU studying Mechanical Engineering. I am a builder and have always had a passion for robotics. So far I have been doing robotics for two years and have been to the World Championship both of those years. I also enjoy working on cars. I hope to learn a lot from the upperclassman in our organization and grow as an engineer through robotics.}
 
 \leftsidemember{Brandon Gallegos}{images/members/brandon.jpg}{TRAKASSS HDSPM}{I serve our team as a builder and designer, assembling structures, designing 3D printed mounts for specific components, and more. This is my first year being a robotics club member. The thought of bringing my design ideas to life has consistently been a desire of mine, and robotics offers the perfect opportunity to apply my skills in a practical, engaging way. Being involved in robotics keeps me motivated and provides invaluable experience in engineering, pushing me to learn and grow with each task. For my studies, I am a junior Mechanical Engineering major minoring in Mathematics and pursing two associates degrees. As a hobby, I am a drumline member and avid music listener.}
 
@@ -272,14 +268,14 @@ VEX High Stake is a 1v1 competitive game at the Vex U level. Following the rule-
 \end{figure}
 
 
-
+\pagebreak
 \subsubsection{\textbf{Specific Game rules}}
 
 
     \textbf{Overview}
 
     
-    This Section is made in order to explain different strategies that can be approached to specific game rules, along with possible subsystems and mechanisms that could give the team an advantage when approaching a head-to-head match. 
+    This section will cover the possible strategies that can be applied to specific game rules, along with possible subsystems and mechanisms that could give the robot an edge in head-to-head matches. 
 \newline
 
     SG1 \textbf{Starting a Match} - Prior to the start of each Match, the Robot must be placed such that it is: 
@@ -299,7 +295,7 @@ SG2 \textbf{Horizontal expansion is limited} - Once the Match begins, Robots may
 
 \subsubsection{SG1 and SG2 analysis and Strategy}
 
-The above rules are related to each other very closely especially relating to game strategy and robot design.  While SG1 gives us the constraints for starting the match, SG2 gives us the information to begin brainstorming different subsystems and mechanisms to give us a advantage.  Seeing \ref{fig:SG2} and referencing VURC Q\&A 2138 we begin to see how designing a goal rush mech for a subsequent 24 inch robot would work.  
+The above rules are related very closely especially regarding game strategy and robot design. SG1 provides the constraints for starting the match, SG2 gives us the information to begin brainstorming different subsystems and mechanisms to give us an advantage.  Seeing \ref{fig:SG2} and referencing VURC Q\&A 2138 we begin to see how designing a goal rush mech for a subsequent 24 inch robot would work.  
 
 \begin{figure}
     \centering
@@ -309,7 +305,7 @@ The above rules are related to each other very closely especially relating to ga
 \end{figure}
 
     By allowing a mechanism in the back of the robot approach the 24 in. max expansion we are able to position the bulk of the robot further way from the starting line. We can further push this advantage by creating another mech in the front of the robot allowing us to reach the goal even faster by decreasing the travel distance needed to reach a mobile goal. 
-Although this method only works with a 24 in. bot whose overall foot print is lower then the max 24x24x24 it gives a significant advantage during auton due the distance needed to travel being much shorter. 
+Although this method only works with a 24 in. bot whose overall foot print is less than the max 24x24x24 it gives a significant advantage during autonomous due the distance needed to travel being much shorter. 
 \newline
 
    \textbf{SG3} - \textbf{Vertical expansion is limited.} Once the Match begins, Robots may expand vertically, but may never contact and/or break more than two Planes of the Ladder at any given time. For the purposes of this rule, the Floor is considered a Level.
@@ -348,12 +344,12 @@ If they are unable to remove the excess Scoring Objects, then they must return t
 SG6 limited the possession of game elements in a effort to stop hording of game elements and unfair advantages that could occur.  For example a strategy for this season is "turtling" in which a robot has placed a fully stacked mobile goal in the positive corner and is now playing defense in order to keep the advantage they have gathered. If SG6 did not cover the possession of one Mobile Goal Turtling would include the defense of two mobile goals one being in the corner, and the other being controlled by the robot. 
 \newline
 
- \textbf{<SG11>} <\textbf{Positive corners are protected during the endgame.} During the last fifteen (15) seconds of a Match, Robots may not contact Mobile Goals that are Placed in the Positive Corners of the Field, may not contact Rings that are Scored on Mobile Goals Placed in the Positive Corners of the Field, and may not Place Mobile Goals or Score Rings in the Positive Corners of the Field. During this protected period, Robots can remove Mobile Goals that are not Placed and Rings that are not Scored from the Positive Corners of the Field, provided that the interaction does not affect the Placed/Scored status of any protected Mobile Goals or Rings. 
+ \textbf{<SG11>} <\textbf{Positive corners are protected during the endgame.} During the last thirty (30) seconds of a Match, Robots may not contact Mobile Goals that are Placed in the Positive Corners of the Field, may not contact Rings that are Scored on Mobile Goals Placed in the Positive Corners of the Field, and may not Place Mobile Goals or Score Rings in the Positive Corners of the Field. During this protected period, Robots can remove Mobile Goals that are not Placed and Rings that are not Scored from the Positive Corners of the Field, provided that the interaction does not affect the Placed/Scored status of any protected Mobile Goals or Rings. 
 \newline
 
 \subsubsection{SG11 Analysis and Strategy}
 
- This is singlehandedly one of the most important rules this season. The protection of the positive corners that last 15 seconds sets up strategies for the whole game, one such examples of these strategies is "turtling". the face that last 15 seconds are protected causes the other team to play catch up and protection if the positive corners are taken by the opponent team.  Later different strategies will be discussed and it can all be traced back to the analysis and the wording of SG11. 
+ This is singlehandedly one of the most important rules this season. The protection of the positive corners that last 30 seconds sets up strategies for the whole game, one such examples of these strategies is "turtling". The fact that last 30 seconds are protected causes the other team to play catch up and protection if the positive corners are taken by the opponent team.  Later different strategies will be discussed and it can all be traced back to the analysis and the wording of SG11. 
 \newline
 
 
@@ -373,7 +369,7 @@ SG6 limited the possession of game elements in a effort to stop hording of game 
 \subsubsection{VUG1 Analysis and Strategy }
 
 
-this rule modifications is a necessary modification to SG2 due to the different size requirements for VURC.  
+This rule modifications is necessary to SG2 due to the different size requirements for VURC.  
 With the knowledge of VUG1, SG2, and Q\&A 2138 we can begin to see how certain strategies such as goal rushing can be implemented. By allowing the 24 be inspected with its starting position reaching the max 24 it is possible to circumvent Q\&A 2058 and following Q\&A 2138 we are able to establish the general idea of a goal rush strategy and mechanism. 
 \newline
 
